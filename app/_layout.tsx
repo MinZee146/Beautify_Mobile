@@ -61,12 +61,6 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={tamaguiConfig}>
       <Stack>
-        <Stack.Screen name="index" options={{ title: "Home" }} />
-        <Stack.Screen name="PromoScreen" options={{ title: "Promo" }} />
-        <Stack initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="SignIn" />
-          <Stack.Screen name="SignUp" />
-        </Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </TamaguiProvider>
