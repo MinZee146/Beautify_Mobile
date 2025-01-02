@@ -21,11 +21,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Stack
       backgroundColor="$background"
-      borderRadius="$4"
-      padding="$4"
+      borderRadius={4}
+      padding={4}
       shadowColor="$shadow"
-      shadowRadius="$2"
-      gap="$3"
+      shadowRadius={2}
+      gap={3}
       width={250}
     >
       {/* Product Image */}
@@ -33,18 +33,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
         source={{ uri: image }}
         width={100}
         height={100}
-        borderRadius="$2"
+        borderRadius={2}
         resizeMode="cover"
       />
 
       <XStack justifyContent="space-between" alignItems="center">
-        <Stack gap="$1">
-          <Text fontSize="$4" fontWeight="700">
+        <Stack gap={1}>
+          <Text fontSize={4} fontWeight="700">
             {name}
           </Text>
-          <XStack alignItems="center" gap="$1">
+          <XStack alignItems="center" gap={1}>
             <AntDesign name="star" size={24} color="gold" />
-            <Text fontSize="$3" color="$colorSecondary">
+            <Text fontSize={3} color="$colorSecondary">
               {rating} ({reviews} review{reviews > 1 ? "s" : ""})
             </Text>
           </XStack>
@@ -52,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </XStack>
 
       <XStack justifyContent="space-between" alignItems="center">
-        <Text fontSize="$4" fontWeight="600" color="$primary">
+        <Text fontSize={4} fontWeight="600" color="$primary">
           ${price}
         </Text>
         <Button

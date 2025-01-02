@@ -15,8 +15,9 @@ export default function Index() {
         About screen
       </Text>
       <Link href="/promo">Go to About screen</Link>
-      <Link href="/auth/signin">Go to Login screen</Link>
-      <Link href="/auth/signup">Go to Sign up screen</Link>
+      <Link href="/components/signin">Go to Login screen</Link>
+      <Link href="/components/signup">Go to Sign up screen</Link>
+      <Link href="/home">Go to Home screen</Link>
     </View>
   );
 }
