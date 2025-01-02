@@ -21,7 +21,11 @@ const fonts = {
 
 const tamaguiConfig = createTamagui({
   ...config,
-  fonts,
+  fonts: {
+    body: fonts.poppins,
+    heading: fonts.playfair,
+  },
+  defaultFont: "body",
 });
 
 type Conf = typeof tamaguiConfig;
