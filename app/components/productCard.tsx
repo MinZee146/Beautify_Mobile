@@ -19,54 +19,48 @@ const ProductCard: React.FC<ProductCardProps> = ({
   reviews,
 }) => {
   return (
-    <Card
-      bordered
-      elevate
-      backgroundColor="$background"
-      width={280}
-      borderRadius="$4"
-    >
-      <Card.Header padded>
+    <Card bordered elevate width="100%" height={120} borderRadius={12}>
+      <XStack height="100%" gap={12} padding={10}>
+        {/* Product Image */}
         <Image
           source={{ uri: image }}
-          width="100%"
-          height={200}
-          borderRadius="$4"
-          resizeMode="cover"
+          width={100}
+          height="100%"
+          borderRadius={8}
         />
-      </Card.Header>
 
-      <Card.Footer padded>
-        <YStack gap={8}>
+        {/* Product Details */}
+        <YStack flex={1} justifyContent="space-between" padding={5}>
           {/* Product Name */}
-          <Text fontSize={16} fontWeight="700" textAlign="center">
-            {name}
-          </Text>
-
-          {/* Rating and Reviews */}
-          <XStack justifyContent="center" alignItems="center" gap={6}>
-            <AntDesign name="star" size={18} color="#FFD700" />
-            <Text fontSize={14} color="$colorSecondary">
-              {rating} ({reviews} review{reviews > 1 ? "s" : ""})
+          <YStack gap={6}>
+            <Text fontSize={14} fontWeight="700" numberOfLines={2}>
+              {name}
             </Text>
-          </XStack>
+
+            {/* Rating and Reviews */}
+            <XStack alignItems="center" gap={6}>
+              <AntDesign name="star" size={14} color="#FFD700" />
+              <Text fontSize={14} color="#6E6E6E">
+                {rating} ({reviews} review{reviews > 1 ? "s" : ""})
+              </Text>
+            </XStack>
+          </YStack>
 
           {/* Price and Add to Cart Button */}
           <XStack justifyContent="space-between" alignItems="center">
-            <Text fontSize={18} fontWeight="600" color="$primary">
+            <Text fontSize={18} fontWeight="600" color="#FF6D00">
               ${price}
             </Text>
             <Button
               circular
-              size={6}
-              backgroundColor="$primary"
+              size={8}
               icon={
-                <FontAwesome5 name="shopping-cart" size={20} color="white" />
+                <FontAwesome5 name="shopping-cart" size={16} color="black" />
               }
             />
           </XStack>
         </YStack>
-      </Card.Footer>
+      </XStack>
     </Card>
   );
 };

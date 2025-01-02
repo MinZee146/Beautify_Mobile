@@ -93,7 +93,7 @@ const HomeScreen = () => {
 
       {/* Product List */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.sectionTitle}>Recent Products</Text>
+        <Text style={styles.sectionTitle}>Best Sellers</Text>
         <View style={styles.productList}>
           {products.map((product, index) => (
             <ProductCard
@@ -156,6 +156,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    display: "flex",
+    rowGap: 10,
   },
 });
 
