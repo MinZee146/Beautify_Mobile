@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swiper from "react-native-swiper";
 import {
   View,
   Text,
@@ -9,7 +10,6 @@ import {
   TextInput,
   ProgressBarAndroid,
 } from "react-native";
-import Swiper from "react-native-swiper";
 
 const ProductDetailScreen = () => {
   const [showMore, setShowMore] = useState(false);
@@ -54,7 +54,7 @@ const ProductDetailScreen = () => {
   );
 
   // Hàm tính tỷ lệ phần trăm cho mỗi mức đánh giá sao
-  const getRatingPercentage = (rating) => {
+  const getRatingPercentage = (rating: keyof typeof product.ratingsCount) => {
     const count = product.ratingsCount[rating] || 0;
     return (count / totalReviews) * 100;
   };
@@ -169,7 +169,9 @@ const ProductDetailScreen = () => {
                       style={[
                         styles.progressBar,
                         {
-                          width: `${getRatingPercentage(Number(rating))}%`,
+                          width: `${getRatingPercentage(
+                            rating as unknown as 1 | 2 | 3 | 4 | 5
+                          )}%`,
                         },
                       ]}
                     />
