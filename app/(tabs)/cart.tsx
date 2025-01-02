@@ -52,7 +52,7 @@ const CartItem: React.FC<CartItemProps> = ({
             {name}
           </Text>
           <Text color="#4caf50" fontWeight="700" fontSize={14}>
-            € {price.toFixed(2)}
+            ${price.toFixed(2)}
           </Text>
           <XStack
             alignItems="center"
@@ -107,33 +107,16 @@ const CartSummary: React.FC<CartSummaryProps> = ({ subtotal, shipping }) => {
       left={0}
       right={0}
     >
-      <XStack justifyContent="space-between" paddingBottom={8}>
-        <Text fontSize={14} color="#666">
-          Sub Total
+      <XStack justifyContent="space-between">
+        <Text color="#fff" fontWeight="bold">
+          Grand total
         </Text>
-        <Text fontSize={14} color="#666">
-          € {subtotal.toFixed(2)}
-        </Text>
-      </XStack>
-      <XStack justifyContent="space-between" paddingBottom={8}>
-        <Text fontSize={14} color="#666">
-          Shipping
-        </Text>
-        <Text fontSize={14} color="#666">
-          € {shipping.toFixed(2)}
-        </Text>
-      </XStack>
-      <Separator />
-      <XStack justifyContent="space-between" paddingTop={8}>
-        <Text fontWeight="700" fontSize={16}>
-          Total
-        </Text>
-        <Text fontWeight="700" fontSize={16} color="#4caf50">
-          € {total.toFixed(2)}
+        <Text color="#fff" fontWeight="bold">
+          $0.00
         </Text>
       </XStack>
       <Button
-        size="$4"
+        size="$3"
         color="##ff7777"
         backgroundColor="#ff7777"
         borderRadius={8}
@@ -141,7 +124,9 @@ const CartSummary: React.FC<CartSummaryProps> = ({ subtotal, shipping }) => {
         width="100%"
         marginTop={12}
       >
-        Checkout
+        <Text color="#fff" fontWeight="600">
+          Checkout now
+        </Text>
       </Button>
     </YStack>
   );
@@ -164,28 +149,28 @@ const CartPage: React.FC = () => {
       image: "https://via.placeholder.com/150/90CAF9",
     },
     {
-      id: 1,
+      id: 3,
       name: "Promio body lotion",
       price: 29.99,
       quantity: 1,
       image: "https://via.placeholder.com/150/FFCC80",
     },
     {
-      id: 2,
+      id: 4,
       name: "Natural Organ oil",
       price: 49.99,
       quantity: 1,
       image: "https://via.placeholder.com/150/90CAF9",
     },
     {
-      id: 1,
+      id: 5,
       name: "Promio body lotion",
       price: 29.99,
       quantity: 1,
       image: "https://via.placeholder.com/150/FFCC80",
     },
     {
-      id: 2,
+      id: 6,
       name: "Natural Organ oil",
       price: 49.99,
       quantity: 1,
@@ -193,14 +178,16 @@ const CartPage: React.FC = () => {
     },
   ]);
 
-  const handleQuantityChange = (id: number, quantity: number) => {
-    setCartItems((items) =>
-      items.map((item) => (item.id === id ? { ...item, quantity } : item))
+  const handleQuantityChange = (id: number, newQuantity: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
     );
   };
 
   const handleRemoveItem = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const subtotal = cartItems.reduce(
@@ -210,7 +197,7 @@ const CartPage: React.FC = () => {
   const shipping = 10.0;
 
   return (
-    <YStack flex={1} backgroundColor="#f5f5f5">
+    <YStack flex={1} backgroundColor="#fefefe">
       {/* Header */}
       <XStack
         padding={12}
@@ -228,7 +215,7 @@ const CartPage: React.FC = () => {
       </XStack>
 
       {/* Cart Items */}
-      <ScrollView contentContainerStyle={{ paddingBottom: 150 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <YStack padding={16}>
           {cartItems.map((item) => (
             <CartItem
