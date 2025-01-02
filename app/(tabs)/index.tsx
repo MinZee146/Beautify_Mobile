@@ -9,7 +9,7 @@ export default function Index() {
           fontSize: 16,
           color: "#000",
           fontWeight: "bold",
-          fontFamily: "Poppins", 
+          fontFamily: "Poppins",
         }}
       >
         About screen
@@ -18,6 +18,7 @@ export default function Index() {
       <Link href="/components/signin">Go to Login screen</Link>
       <Link href="/components/signup">Go to Sign up screen</Link>
       <Link href="/home">Go to Home screen</Link>
+      <Link href="/components/productDetail">Go to detail product screen</Link>
     </View>
   );
 }
