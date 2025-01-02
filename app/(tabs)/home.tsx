@@ -12,6 +12,7 @@ import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ProductCard from "../components/productCard";
 import { XStack } from "tamagui";
+import PopularCard from "../components/popularCard";
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -96,7 +97,25 @@ const HomeScreen = () => {
 
       {/* Product List */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.sectionTitle}>Best Sellers</Text>
+        <Text style={styles.sectionTitle}>Popular</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.popularList}
+        >
+          {products.map((product, index) => (
+            <PopularCard
+              key={index}
+              name={product.name}
+              image={product.image}
+              price={product.price}
+              rating={product.rating}
+              reviews={product.reviews}
+            />
+          ))}
+        </ScrollView>
+
+        <Text style={styles.sectionTitle}>Products</Text>
         <View style={styles.productList}>
           {products.map((product, index) => (
             <ProductCard
@@ -153,7 +172,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical: 16,
+    marginVertical: 15,
   },
   productList: {
     flexDirection: "row",
@@ -161,6 +180,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     display: "flex",
     rowGap: 10,
+  },
+  popularList: {
+    flexDirection: "row",
+    columnGap: 10,
+    borderRadius: 10,
+    backgroundColor: "transparent", // Không có màu nền
   },
 });
 
