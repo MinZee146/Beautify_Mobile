@@ -18,6 +18,7 @@ export default function Index() {
       <Link href="/components/signin">Go to Login screen</Link>
       <Link href="/components/signup">Go to Sign up screen</Link>
       <Link href="/home">Go to Home screen</Link>
+      <Link href="/components/productDetail">Go to detail product screen</Link>
       <Link href="/cart">Go to Cart</Link>
     </View>
   );

@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
         </TouchableOpacity>
         <Text style={styles.footerText}>
           Don't have an account?{" "}
-          <Link href="/auth/signup" style={styles.signUp}>
+          <Link href="/components/signup" style={styles.signUp}>
             Sign up
           </Link>
         </Text>

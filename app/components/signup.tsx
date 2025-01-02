@@ -54,7 +54,7 @@ const SignUp: React.FC = () => {
         </TouchableOpacity>
         <Text style={styles.footerText}>
           Already have an account?{" "}
-          <Link href="/auth/signin" style={styles.signUp}>
+          <Link href="/components/signin" style={styles.signUp}>
             Sign in
           </Link>
         </Text>
