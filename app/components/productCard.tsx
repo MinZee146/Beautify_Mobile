@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Text, Image, Button, XStack } from "tamagui";
+import { Card, Text, Image, Button, XStack, YStack } from "tamagui";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -19,49 +19,55 @@ const ProductCard: React.FC<ProductCardProps> = ({
   reviews,
 }) => {
   return (
-    <Stack
+    <Card
+      bordered
+      elevate
       backgroundColor="$background"
-      borderRadius={4}
-      padding={4}
-      shadowColor="$shadow"
-      shadowRadius={2}
-      gap={3}
-      width={250}
+      width={280}
+      borderRadius="$4"
     >
-      {/* Product Image */}
-      <Image
-        source={{ uri: image }}
-        width={100}
-        height={100}
-        borderRadius={2}
-        resizeMode="cover"
-      />
+      <Card.Header padded>
+        <Image
+          source={{ uri: image }}
+          width="100%"
+          height={200}
+          borderRadius="$4"
+          resizeMode="cover"
+        />
+      </Card.Header>
 
-      <XStack justifyContent="space-between" alignItems="center">
-        <Stack gap={1}>
-          <Text fontSize={4} fontWeight="700">
+      <Card.Footer padded>
+        <YStack gap={8}>
+          {/* Product Name */}
+          <Text fontSize={16} fontWeight="700" textAlign="center">
             {name}
           </Text>
-          <XStack alignItems="center" gap={1}>
-            <AntDesign name="star" size={24} color="gold" />
-            <Text fontSize={3} color="$colorSecondary">
+
+          {/* Rating and Reviews */}
+          <XStack justifyContent="center" alignItems="center" gap={6}>
+            <AntDesign name="star" size={18} color="#FFD700" />
+            <Text fontSize={14} color="$colorSecondary">
               {rating} ({reviews} review{reviews > 1 ? "s" : ""})
             </Text>
           </XStack>
-        </Stack>
-      </XStack>
 
-      <XStack justifyContent="space-between" alignItems="center">
-        <Text fontSize={4} fontWeight="600" color="$primary">
-          ${price}
-        </Text>
-        <Button
-          size="$3"
-          circular
-          icon={<FontAwesome5 name="shopping-cart" size={24} color="black" />}
-        />
-      </XStack>
-    </Stack>
+          {/* Price and Add to Cart Button */}
+          <XStack justifyContent="space-between" alignItems="center">
+            <Text fontSize={18} fontWeight="600" color="$primary">
+              ${price}
+            </Text>
+            <Button
+              circular
+              size={6}
+              backgroundColor="$primary"
+              icon={
+                <FontAwesome5 name="shopping-cart" size={20} color="white" />
+              }
+            />
+          </XStack>
+        </YStack>
+      </Card.Footer>
+    </Card>
   );
 };
 

@@ -9,7 +9,7 @@ export default function Index() {
           fontSize: 16,
           color: "#000",
           fontWeight: "bold",
-          fontFamily: "Poppins",
+          fontFamily: "Poppins", 
         }}
       >
         About screen

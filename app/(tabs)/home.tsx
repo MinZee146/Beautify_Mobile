@@ -10,12 +10,11 @@ import { useRouter } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import ProductCard from "../components/productCard"; // Import ProductCard đã tạo
+import ProductCard from "../components/productCard";
 
 const HomeScreen = () => {
   const router = useRouter();
 
-  // Danh sách sản phẩm ngẫu nhiên
   const products = [
     {
       name: "Promio Body Lotion",
@@ -56,78 +55,83 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Feather name="menu" size={24} color="black" />
-        <AntDesign name="search1" size={24} color="black" />
-        <Ionicons name="bag-handle-outline" size={24} color="black" />
-      </View>
+      {/* Sticky Header */}
+      <View style={styles.stickyHeader}>
+        <View style={styles.header}>
+          <Feather name="menu" size={24} color="black" />
+          <AntDesign name="search1" size={24} color="black" />
+          <Ionicons name="bag-handle-outline" size={24} color="black" />
+        </View>
 
-      {/* Categories */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.categories}
-      >
-        {["Kids", "Women", "Cream", "Face Wash", "Troll", "Test"].map(
-          (category, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.categoryButton,
-                index === 1 && styles.activeCategory,
-              ]}
-            >
-              <Text
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categories}
+        >
+          {["Kids", "Women", "Cream", "Face Wash", "Troll", "Test"].map(
+            (category, index) => (
+              <TouchableOpacity
+                key={index}
                 style={[
-                  styles.categoryText,
-                  index === 1 && styles.activeCategoryText,
+                  styles.categoryButton,
+                  index === 1 && styles.activeCategory,
                 ]}
               >
-                {category}
-              </Text>
-            </TouchableOpacity>
-          )
-        )}
-      </ScrollView>
-
-      {/* Popular Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Popular</Text>
+                <Text
+                  style={[
+                    styles.categoryText,
+                    index === 1 && styles.activeCategoryText,
+                  ]}
+                >
+                  {category}
+                </Text>
+              </TouchableOpacity>
+            )
+          )}
+        </ScrollView>
       </View>
 
-      {/* Recent Products */}
-      <View style={styles.section}>
+      {/* Product List */}
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Text style={styles.sectionTitle}>Recent Products</Text>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {products.map((product, index) => (
-          <ProductCard
-            key={index}
-            name={product.name}
-            image={product.image}
-            price={product.price}
-            rating={product.rating}
-            reviews={product.reviews}
-          />
-        ))}
+        <View style={styles.productList}>
+          {products.map((product, index) => (
+            <ProductCard
+              key={index}
+              name={product.name}
+              image={product.image}
+              price={product.price}
+              rating={product.rating}
+              reviews={product.reviews}
+            />
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 16 },
+  container: { flex: 1, backgroundColor: "#fff" },
+  stickyHeader: {
+    backgroundColor: "#fff",
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    zIndex: 1000,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   categories: {
     flexDirection: "row",
-    marginTop: 30,
-    alignItems: "flex-start",
+    alignItems: "center",
     paddingHorizontal: 8,
+    marginBottom: 8,
   },
   categoryButton: {
     paddingVertical: 8,
@@ -139,13 +143,20 @@ const styles = StyleSheet.create({
   activeCategory: { backgroundColor: "#4CAF50" },
   categoryText: { color: "#555", fontSize: 14 },
   activeCategoryText: { color: "#fff", fontWeight: "bold" },
-  section: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  scrollContainer: {
+    paddingBottom: 16,
+    paddingHorizontal: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
     marginVertical: 16,
   },
-  sectionTitle: { fontSize: 18, fontWeight: "bold" },
+  productList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
 });
 
 export default HomeScreen;

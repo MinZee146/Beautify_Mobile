@@ -4,37 +4,18 @@ import { TamaguiProvider, createTamagui } from "@tamagui/core";
 import { config } from "@tamagui/config/v3";
 import { createFont } from "@tamagui/core";
 import * as React from "react";
+import { View, Text } from "react-native";
 
 const fonts = {
   poppins: createFont({
     family: "Poppins",
-    size: {
-      1: 12,
-      2: 14,
-      3: 16,
-      4: 18,
-      5: 20,
-    },
-    weight: {
-      1: "400",
-      2: "500",
-      3: "600",
-    },
+    size: { 1: 12, 2: 14, 3: 16, 4: 18, 5: 20 },
+    weight: { 1: "400", 2: "500", 3: "600" },
   }),
   playfair: createFont({
     family: "Playfair Display",
-    size: {
-      1: 14,
-      2: 16,
-      3: 18,
-      4: 20,
-      5: 24,
-    },
-    weight: {
-      1: "400",
-      2: "500",
-      3: "700",
-    },
+    size: { 1: 14, 2: 16, 3: 18, 4: 20, 5: 24 },
+    weight: { 1: "400", 2: "500", 3: "700" },
   }),
 };
 
@@ -55,7 +36,11 @@ export default function RootLayout() {
   });
 
   if (!fontsLoaded) {
-    return null; // or a loading screen
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Loading Fonts...</Text>
+      </View>
+    );
   }
 
   return (
