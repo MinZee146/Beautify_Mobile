@@ -70,7 +70,7 @@ const CartItem: React.FC<CartItemProps> = ({
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
-          padding={6}
+          paddingVertical={5}
         >
           {/* Checkbox */}
           <TouchableOpacity
@@ -80,7 +80,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <Ionicons
               name={isChecked ? "checkbox" : "square-outline"}
               size={24}
-              color="#aaaaaa"
+              color="#000"
             />
           </TouchableOpacity>
 
@@ -190,6 +190,13 @@ const CartPage: React.FC = () => {
     );
   };
 
+  const handleToggleSelectAll = () => {
+    const allChecked = cartItems.every((item) => item.isChecked);
+    setCartItems((prevItems) =>
+      prevItems.map((item) => ({ ...item, isChecked: !allChecked }))
+    );
+  };
+
   const total = cartItems.reduce(
     (sum: number, item: any) =>
       item.isChecked ? sum + item.price * item.quantity : sum,
@@ -201,6 +208,7 @@ const CartPage: React.FC = () => {
       {/* Header */}
       <XStack
         padding={12}
+        paddingHorizontal={20}
         backgroundColor="#fff"
         alignItems="center"
         justifyContent="space-between"
@@ -211,7 +219,17 @@ const CartPage: React.FC = () => {
         <Text fontWeight="700" fontSize={18}>
           My Cart
         </Text>
-        <Ionicons name="bag-handle-outline" size={24} color="#000" />
+        <TouchableOpacity onPress={handleToggleSelectAll}>
+          <Ionicons
+            name={
+              cartItems.every((item) => item.isChecked)
+                ? "checkbox"
+                : "square-outline"
+            }
+            size={24}
+            color="#000"
+          />
+        </TouchableOpacity>
       </XStack>
 
       {/* Cart Items */}
