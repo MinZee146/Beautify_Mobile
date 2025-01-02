@@ -1,49 +1,52 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { YStack, XStack, Text, Button, Image, Card, Separator } from "tamagui";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 type CartItemProps = {
+  id: number;
   name: string;
   price: number;
   quantity: number;
   image: string;
+  isChecked: boolean;
   onQuantityChange: (quantity: number) => void;
   onRemove: () => void;
+  onToggleCheck: (id: number) => void;
 };
 
 const CartItem: React.FC<CartItemProps> = ({
+  id,
   name,
   price,
   quantity,
   image,
+  isChecked,
   onQuantityChange,
   onRemove,
+  onToggleCheck,
 }) => {
   return (
-    <Card padding={8} backgroundColor="$colorTransparent">
-      <XStack space={12} alignItems="center">
-        <Image
-          source={{ uri: image }}
-          width={100}
-          height={100}
-          borderRadius={8}
-          resizeMode="cover"
-        />
-        <YStack flex={1}>
-          <Text fontWeight="bold" fontSize={16} marginBottom={4}>
-            {name}
-          </Text>
-          <Text color="#4caf50" fontWeight="bold" fontSize={15}>
-            ${price.toFixed(2)}
-          </Text>
-          <XStack
-            alignItems="center"
-            justifyContent="space-between"
-            marginTop={8}
-          >
+    <Card padding={8} backgroundColor="$colorTransparent" width="100%">
+      <XStack display="flex" justifyContent="space-between">
+        <XStack space={12} alignItems="center">
+          <Image
+            source={{ uri: image }}
+            width={100}
+            height={100}
+            borderRadius={8}
+            resizeMode="cover"
+          />
+          <YStack flex={1}>
+            <Text fontWeight="bold" fontSize={16} marginBottom={4}>
+              {name}
+            </Text>
+            <Text color="#4caf50" fontWeight="bold" fontSize={15}>
+              ${price.toFixed(2)}
+            </Text>
+
             {/* Quantity Controls */}
-            <XStack alignItems="center" space={8}>
+            <XStack alignItems="center" space={8} marginTop={8}>
               <TouchableOpacity
                 activeOpacity={0.6}
                 onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
@@ -60,11 +63,31 @@ const CartItem: React.FC<CartItemProps> = ({
                 <Ionicons name="add-circle-outline" size={28} color="#000" />
               </TouchableOpacity>
             </XStack>
-            {/* Remove Button */}
-            <TouchableOpacity activeOpacity={0.7} onPress={onRemove}>
-              <Ionicons name="close-circle-outline" size={28} color="#d32f2f" />
-            </TouchableOpacity>
-          </XStack>
+          </YStack>
+        </XStack>
+
+        <YStack
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          padding={6}
+        >
+          {/* Checkbox */}
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => onToggleCheck(id)}
+          >
+            <Ionicons
+              name={isChecked ? "checkbox" : "square-outline"}
+              size={24}
+              color="#aaaaaa"
+            />
+          </TouchableOpacity>
+
+          {/* Remove Button */}
+          <TouchableOpacity activeOpacity={0.7} onPress={onRemove}>
+            <Ionicons name="close-circle-outline" size={28} color="#d32f2f" />
+          </TouchableOpacity>
         </YStack>
       </XStack>
     </Card>
@@ -72,13 +95,10 @@ const CartItem: React.FC<CartItemProps> = ({
 };
 
 type CartSummaryProps = {
-  subtotal: number;
-  shipping: number;
+  total: number;
 };
 
-const CartSummary: React.FC<CartSummaryProps> = ({ subtotal, shipping }) => {
-  const total = subtotal + shipping;
-
+const CartSummary: React.FC<CartSummaryProps> = ({ total }) => {
   return (
     <YStack
       padding={16}
@@ -109,6 +129,7 @@ const CartPage: React.FC = () => {
       price: 29.99,
       quantity: 1,
       image: "https://via.placeholder.com/150/FFCC80",
+      isChecked: true, // Mặc định đã được chọn
     },
     {
       id: 2,
@@ -116,6 +137,7 @@ const CartPage: React.FC = () => {
       price: 49.99,
       quantity: 1,
       image: "https://via.placeholder.com/150/90CAF9",
+      isChecked: false,
     },
     {
       id: 3,
@@ -145,6 +167,7 @@ const CartPage: React.FC = () => {
       quantity: 1,
       image: "https://via.placeholder.com/150/90CAF9",
     },
+    // Add more items here
   ]);
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
@@ -159,11 +182,19 @@ const CartPage: React.FC = () => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const handleToggleCheck = (id: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isChecked: !item.isChecked } : item
+      )
+    );
+  };
+
+  const total = cartItems.reduce(
+    (sum: number, item: any) =>
+      item.isChecked ? sum + item.price * item.quantity : sum,
     0
   );
-  const shipping = 10.0;
 
   return (
     <YStack flex={1} backgroundColor="#fefefe">
@@ -184,22 +215,24 @@ const CartPage: React.FC = () => {
       </XStack>
 
       {/* Cart Items */}
-      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <YStack padding={8}>
           {cartItems.map((item, index) => (
             <>
               <CartItem
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 price={item.price}
                 quantity={item.quantity}
                 image={item.image}
+                isChecked={item.isChecked ?? false}
                 onQuantityChange={(quantity) =>
                   handleQuantityChange(item.id, quantity)
                 }
                 onRemove={() => handleRemoveItem(item.id)}
+                onToggleCheck={handleToggleCheck}
               />
-
               {index < cartItems.length - 1 && <Separator my={12} />}
             </>
           ))}
@@ -207,7 +240,7 @@ const CartPage: React.FC = () => {
       </ScrollView>
 
       {/* Summary */}
-      <CartSummary subtotal={subtotal} shipping={shipping} />
+      <CartSummary total={total} />
     </YStack>
   );
 };
