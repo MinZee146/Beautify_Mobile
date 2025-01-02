@@ -11,6 +11,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ProductCard from "../components/productCard";
+import { XStack } from "tamagui";
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -59,8 +60,10 @@ const HomeScreen = () => {
       <View style={styles.stickyHeader}>
         <View style={styles.header}>
           <Feather name="menu" size={24} color="black" />
-          <AntDesign name="search1" size={24} color="black" />
-          <Ionicons name="bag-handle-outline" size={24} color="black" />
+          <XStack gap={16}>
+            <AntDesign name="search1" size={24} color="black" />
+            <Ionicons name="bag-handle-outline" size={24} color="black" />
+          </XStack>
         </View>
 
         <ScrollView

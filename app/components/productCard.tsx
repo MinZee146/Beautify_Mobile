@@ -19,7 +19,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   reviews,
 }) => {
   return (
-    <Card bordered elevate width="100%" height={120} borderRadius={12}>
+    <Card
+      bordered
+      elevate
+      width="100%"
+      height={120}
+      borderRadius={12}
+      backgroundColor="#F5F5ED"
+    >
       <XStack height="100%" gap={12} padding={10}>
         {/* Product Image */}
         <Image
