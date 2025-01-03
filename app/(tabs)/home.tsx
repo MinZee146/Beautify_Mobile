@@ -78,10 +78,10 @@ const HomeScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categories}
         >
-          {["Kids", "Women", "Cream", "Face Wash", "Troll", "Test"].map(
             (category, index) => (
               <TouchableOpacity
                 key={index}
+          data={Category}
                 style={[
                   styles.categoryButton,
                   index === 1 && styles.activeCategory,
