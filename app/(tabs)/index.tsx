@@ -21,6 +21,8 @@ export default function Index() {
       <Link href="/components/productDetail">Go to detail product screen</Link>
       <Link href="/cart">Go to Cart</Link>
       <Link href="/components/checkout">Go to checkout screen</Link>
+      <Link href="/components/order">Go to order screen</Link>
+      <Link href="/components/orderDetail">Go to order detail screen</Link>
     </View>
   );
 }
