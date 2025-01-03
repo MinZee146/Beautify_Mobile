@@ -13,8 +13,10 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image } from "tamagui";
 import Banner from "../components/banner";
 import Category from "../enities/category";
+import { useRouter } from "expo-router";
 
 const HomeScreen = () => {
+  const router = useRouter();
   const products = [
     {
       name: "Promio Body Lotion",
@@ -71,7 +73,9 @@ const HomeScreen = () => {
         />
         <XStack gap={16}>
           <AntDesign name="search1" size={24} color="#FBFCD4" />
-          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+          <TouchableOpacity onPress={() => router.push("/components/cart")}>
+            <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+          </TouchableOpacity>
         </XStack>
       </XStack>
       <View style={styles.stickyHeader}>
