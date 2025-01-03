@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  TouchableOpacity,
   Image,
 } from "react-native";
 
@@ -33,7 +32,7 @@ const OrderListScreen = () => {
     },
   ];
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: { id: string; date: string; total: string; status: string; products: { id: string; name: string; quantity: number; price: string; }[]; } }) => {
     return (
       <View style={styles.orderItem}>
         <Text style={styles.orderDate}>Order Date: {item.date}</Text>

@@ -236,9 +236,8 @@ const CartPage: React.FC = () => {
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <YStack padding={8}>
           {cartItems.map((item, index) => (
-            <>
+            <View key={item.id}>
               <CartItem
-                key={item.id}
                 id={item.id}
                 name={item.name}
                 price={item.price}
@@ -252,11 +251,10 @@ const CartPage: React.FC = () => {
                 onToggleCheck={handleToggleCheck}
               />
               {index < cartItems.length - 1 && <Separator my={12} />}
-            </>
+            </View>
           ))}
         </YStack>
       </ScrollView>
-
       {/* Summary */}
       <CartSummary total={total} />
     </YStack>
