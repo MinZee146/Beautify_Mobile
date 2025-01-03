@@ -7,7 +7,6 @@ import {
   Modal,
   FlatList,
   StyleSheet,
-  ScrollView,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -77,7 +76,7 @@ const CheckoutScreen = () => {
   ];
 
   const totalAmount = products.reduce((total, product) => {
-    const price = parseFloat(product.price.slice(1)); // Remove "$" and convert to float
+    const price = parseFloat(product.price.slice(1));
     return total + price * product.quantity;
   }, 0);
 
@@ -100,223 +99,210 @@ const CheckoutScreen = () => {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Checkout</Text>
-        </View>
+      <View style={styles.container}>
+        <FlatList
+          contentContainerStyle={styles.contentContainer}
+          ListHeaderComponent={
+            <>
+              {/* Header */}
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Checkout</Text>
+              </View>
 
-        {/* User Info */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>User Info</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Full Name"
-            value={userInfo.name}
-            onChangeText={(text) => setUserInfo({ ...userInfo, name: text })}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Address"
-            value={userInfo.address}
-            onChangeText={(text) => setUserInfo({ ...userInfo, address: text })}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Phone Number"
-            value={userInfo.phoneNumber}
-            keyboardType="phone-pad"
-            onChangeText={(text) =>
-              setUserInfo({ ...userInfo, phoneNumber: text })
-            }
-          />
-        </View>
-
-        {/* Voucher */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Voucher</Text>
-          <TouchableOpacity
-            onPress={() => setIsVoucherModalVisible(true)}
-            style={styles.voucherButton}
-          >
-            {voucher ? (
-              <View style={styles.voucherContent}>
-                <Image
-                  source={{ uri: voucher.logo }}
-                  style={styles.voucherLogo}
+              {/* User Info */}
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Your Information</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Full Name"
+                  value={userInfo.name}
+                  onChangeText={(text) =>
+                    setUserInfo({ ...userInfo, name: text })
+                  }
                 />
-                <Text style={styles.voucherText}>
-                  {voucher.code} - {voucher.discount}
+                <TextInput
+                  style={styles.input}
+                  placeholder="Address"
+                  value={userInfo.address}
+                  onChangeText={(text) =>
+                    setUserInfo({ ...userInfo, address: text })
+                  }
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Phone Number"
+                  value={userInfo.phoneNumber}
+                  keyboardType="phone-pad"
+                  onChangeText={(text) =>
+                    setUserInfo({ ...userInfo, phoneNumber: text })
+                  }
+                />
+              </View>
+
+              {/* Voucher */}
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Voucher</Text>
+                <TouchableOpacity
+                  onPress={() => setIsVoucherModalVisible(true)}
+                  style={styles.cardButton}
+                >
+                  {voucher ? (
+                    <View style={styles.rowCenter}>
+                      <Image
+                        source={{ uri: voucher.logo }}
+                        style={styles.voucherLogo}
+                      />
+                      <Text style={styles.voucherText}>
+                        {voucher.code} - {voucher.discount}
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text style={styles.placeholderText}>Select a voucher</Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+
+              {/* Payment Method */}
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Payment Method</Text>
+                <TouchableOpacity
+                  onPress={() => setIsPaymentModalVisible(true)}
+                  style={styles.cardButton}
+                >
+                  <Text style={styles.placeholderText}>{paymentMethod}</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Order Summary */}
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Order Summary</Text>
+              </View>
+            </>
+          }
+          data={products}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.productRow}>
+              <Image source={{ uri: item.image }} style={styles.productImage} />
+              <View style={styles.productDetails}>
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.productPrice}>
+                  {item.price} x {item.quantity}
                 </Text>
               </View>
-            ) : (
-              <Text style={styles.voucherButtonText}>Select Voucher</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-
-        {/* Payment Method */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Payment Method</Text>
-          <TouchableOpacity
-            onPress={() => setIsPaymentModalVisible(true)}
-            style={styles.paymentButton}
-          >
-            <Text style={styles.paymentButtonText}>{paymentMethod}</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Summary Order */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Order Summary</Text>
-          <FlatList
-            data={products}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.productRow}>
-                <Image
-                  source={{ uri: item.image }}
-                  style={styles.productImage}
-                />
-                <View style={styles.productDetails}>
-                  <Text style={styles.productName}>{item.name}</Text>
-                  <Text style={styles.productPrice}>
-                    {item.price} x {item.quantity}
-                  </Text>
-                </View>
-              </View>
-            )}
-          />
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryText}>Total:</Text>
-            <Text style={styles.summaryText}>${totalAmount}</Text>
-          </View>
-          {voucher && (
-            <View style={styles.summaryRow}>
-              <Text style={styles.summaryText}>
-                Discount ({voucher.discount}):
-              </Text>
-              <Text style={styles.summaryText}>
-                -$
-                {((totalAmount * parseInt(voucher.discount)) / 100).toFixed(2)}
-              </Text>
             </View>
           )}
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryText}>Amount to Pay:</Text>
-            <Text style={styles.summaryText}>
-              $
-              {(
-                totalAmount -
-                (voucher ? (totalAmount * parseInt(voucher.discount)) / 100 : 0)
-              ).toFixed(2)}
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
+        />
 
-      {/* Place Order Button */}
-      <View style={styles.placeOrderButtonContainer}>
-        <TouchableOpacity
-          onPress={handlePlaceOrder}
-          style={styles.placeOrderButton}
+        {/* Footer Button */}
+        <View style={styles.footer}>
+          <Text style={styles.summaryText}>
+            Total: $
+            {(voucher
+              ? totalAmount -
+                (totalAmount * parseInt(voucher.discount, 10)) / 100
+              : totalAmount
+            ).toFixed(2)}
+          </Text>
+          <TouchableOpacity
+            onPress={handlePlaceOrder}
+            style={styles.placeOrderButton}
+          >
+            <Text style={styles.placeOrderButtonText}>Place Order</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Voucher Modal */}
+        <Modal
+          visible={isVoucherModalVisible}
+          animationType="slide"
+          transparent
+          onRequestClose={() => setIsVoucherModalVisible(false)}
         >
-          <Text style={styles.placeOrderButtonText}>Place Order</Text>
-        </TouchableOpacity>
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Select Voucher</Text>
+              <FlatList
+                data={vouchers}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => applyVoucher(item)}
+                    style={styles.modalItem}
+                  >
+                    <Text style={styles.modalItemText}>
+                      {item.code} - {item.discount}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+              <TouchableOpacity
+                onPress={() => setIsVoucherModalVisible(false)}
+                style={styles.modalCloseButton}
+              >
+                <Text style={styles.modalCloseButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        {/* Payment Method Modal */}
+        <Modal
+          visible={isPaymentModalVisible}
+          animationType="slide"
+          transparent
+          onRequestClose={() => setIsPaymentModalVisible(false)}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Select Payment Method</Text>
+              <FlatList
+                data={paymentMethods}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => handlePaymentMethodChange(item.name)}
+                    style={styles.modalItem}
+                  >
+                    <Image
+                      source={{ uri: item.image }}
+                      style={styles.paymentMethodImage}
+                    />
+                    <Text style={styles.modalItemText}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+              <TouchableOpacity
+                onPress={() => setIsPaymentModalVisible(false)}
+                style={styles.modalCloseButton}
+              >
+                <Text style={styles.modalCloseButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </View>
-
-      {/* Payment Method Modal */}
-      <Modal
-        visible={isPaymentModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsPaymentModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Select Payment Method</Text>
-            <FlatList
-              data={paymentMethods}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => handlePaymentMethodChange(item.name)}
-                  style={styles.modalItem}
-                >
-                  <Image
-                    source={{ uri: item.image }}
-                    style={styles.paymentIcon}
-                  />
-                  <Text style={styles.modalItemText}>{item.name}</Text>
-                </TouchableOpacity>
-              )}
-            />
-            <TouchableOpacity
-              onPress={() => setIsPaymentModalVisible(false)}
-              style={styles.modalCloseButton}
-            >
-              <Text style={styles.modalCloseButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Voucher Modal */}
-      <Modal
-        visible={isVoucherModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsVoucherModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Select Voucher</Text>
-            <FlatList
-              data={vouchers}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => applyVoucher(item)}
-                  style={styles.modalItem}
-                >
-                  <Text style={styles.modalItemText}>
-                    {item.code} - {item.discount}
-                  </Text>
-                </TouchableOpacity>
-              )}
-            />
-            <TouchableOpacity
-              onPress={() => setIsVoucherModalVisible(false)}
-              style={styles.modalCloseButton}
-            >
-              <Text style={styles.modalCloseButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: "#f9f9f9",
+  },
+  contentContainer: {
     padding: 16,
-    paddingBottom: 100,
-    backgroundColor: "#f7f7f7",
+    paddingBottom: 120,
   },
   header: {
-    backgroundColor: "#fff",
-    padding: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-    borderRadius: 10,
     marginBottom: 20,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: "bold",
     color: "#333",
+    textAlign: "center",
   },
   section: {
     marginBottom: 20,
@@ -324,77 +310,67 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#444",
-    marginBottom: 8,
+    marginBottom: 10,
+    color: "#333",
   },
   input: {
-    height: 45,
-    borderColor: "#ccc",
     borderWidth: 1,
-    borderRadius: 8,
-    paddingLeft: 10,
-    marginBottom: 15,
-    backgroundColor: "#f9f9f9",
+    borderColor: "#ddd",
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 12,
+    backgroundColor: "#fff",
     fontSize: 16,
+    color: "#333",
   },
-  voucherButton: {
-    backgroundColor: "#FDF5F7",
+  cardButton: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 12,
     padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#FF00A0", // Darker pink border color
-    borderStyle: "dashed", // Đặt border là kiểu nét đứt
+    backgroundColor: "#fff",
     flexDirection: "row",
-    color: "#000000",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  voucherContent: {
+  rowCenter: {
     flexDirection: "row",
     alignItems: "center",
   },
   voucherLogo: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     marginRight: 10,
   },
   voucherText: {
     fontSize: 16,
-    color: "#fff",
+    color: "#333",
   },
-  voucherButtonText: {
+  placeholderText: {
     fontSize: 16,
-    color: "#000", // Chữ màu đen
-  },
-  paymentButton: {
-    backgroundColor: "#e6e6e6",
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  paymentButtonText: {
-    fontSize: 16,
-    color: "#555",
+    color: "#999",
   },
   productRow: {
     flexDirection: "row",
-    marginBottom: 15,
     backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 15,
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 12,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
-    marginHorizontal: 5,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
   },
   productImage: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     borderRadius: 10,
-    marginRight: 15,
+    marginRight: 12,
   },
   productDetails: {
     flex: 1,
+    justifyContent: "center",
   },
   productName: {
     fontSize: 16,
@@ -403,86 +379,85 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 16,
-    color: "#777",
+    color: "#555",
   },
-  summaryRow: {
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#fff",
+    padding: 16,
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    alignItems: "center",
   },
   summaryText: {
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: "bold",
     color: "#333",
   },
-  placeOrderButtonContainer: {
-    position: "absolute",
-    bottom: 16,
-    left: 16,
-    right: 16,
-    padding: 16,
-  },
   placeOrderButton: {
-    backgroundColor: "#e91e63",
-    padding: 16,
-    borderRadius: 10,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
+    backgroundColor: "#007bff",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 12,
   },
   placeOrderButtonText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
   },
-  modalOverlay: {
+  modalBackground: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  modalContent: {
-    backgroundColor: "#fff",
-    padding: 20,
-    borderRadius: 15,
+  modalContainer: {
     width: "80%",
-    overflow: "hidden",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 20,
+    elevation: 5,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 16,
     color: "#333",
+    marginBottom: 12,
+    textAlign: "center",
   },
   modalItem: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f1f1f1",
     flexDirection: "row",
     alignItems: "center",
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
   },
   modalItemText: {
     fontSize: 16,
     color: "#333",
     marginLeft: 10,
   },
-  paymentIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 5,
-  },
   modalCloseButton: {
-    backgroundColor: "#e91e63",
-    padding: 12,
-    borderRadius: 10,
-    marginTop: 16,
+    marginTop: 20,
+    backgroundColor: "#ff6347",
+    paddingVertical: 12,
+    borderRadius: 12,
     alignItems: "center",
   },
   modalCloseButtonText: {
     color: "#fff",
     fontSize: 16,
+    fontWeight: "bold",
+  },
+  paymentMethodImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 6,
   },
 });
 
