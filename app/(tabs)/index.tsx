@@ -1,5 +1,17 @@
-import { Link } from "expo-router";
+import { Link, Route } from "expo-router";
 import { Text, View } from "react-native";
+
+const routes: { name: string; path: Route }[] = [
+  { name: "Promo", path: "/promo" },
+  { name: "Sign In", path: "/components/signin" },
+  { name: "Sign Up", path: "/components/signup" },
+  { name: "Home", path: "/home" },
+  { name: "Product Detail", path: "/components/productDetail" },
+  { name: "Cart", path: "/cart" },
+  { name: "Checkout", path: "/components/checkout" },
+  { name: "Order", path: "/components/order" },
+  { name: "Order Detail", path: "/components/orderDetail" },
+];
 
 export default function Index() {
   return (
@@ -12,17 +24,13 @@ export default function Index() {
           fontFamily: "Poppins",
         }}
       >
-        About screen
+        About Screen
       </Text>
-      <Link href="/promo">Go to About screen</Link>
-      <Link href="/components/signin">Go to Login screen</Link>
-      <Link href="/components/signup">Go to Sign up screen</Link>
-      <Link href="/home">Go to Home screen</Link>
-      <Link href="/components/productDetail">Go to detail product screen</Link>
-      <Link href="/cart">Go to Cart</Link>
-      <Link href="/components/checkout">Go to checkout screen</Link>
-      <Link href="/components/order">Go to order screen</Link>
-      <Link href="/components/orderDetail">Go to order detail screen</Link>
+      {routes.map((route, index) => (
+        <Link key={index} href={route.path}>
+          {route.name}
+        </Link>
+      ))}
     </View>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { YStack, XStack, Text, Button, Image, Card, Separator } from "tamagui";
+import { YStack, XStack, Text, Image, Card, Separator } from "tamagui";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRouter } from "expo-router";
 
 type CartItemProps = {
   id: number;
@@ -122,6 +123,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ total }) => {
 };
 
 const CartPage: React.FC = () => {
+  const router = useRouter();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -215,7 +217,9 @@ const CartPage: React.FC = () => {
         borderBottomWidth={1}
         borderColor="#e0e0e0"
       >
-        <Ionicons name="arrow-back" size={24} color="#000" />
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#000" />
+        </TouchableOpacity>
         <Text fontWeight="700" fontSize={18}>
           My Cart
         </Text>
