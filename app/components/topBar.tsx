@@ -18,7 +18,12 @@ export default function TopBar() {
           height={36}
           borderRadius={12}
         />
-        <Text fontSize={20} fontWeight="bold" color="#FF748B">
+        <Text
+          fontSize={20}
+          fontWeight="bold"
+          fontFamily="Poppins-Bold"
+          color="#FF748B"
+        >
           BEAUTIFY
         </Text>
       </XStack>

@@ -14,9 +14,8 @@ const SignIn: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Beautify</Text>
       <View style={styles.card}>
-        <Text style={styles.title}>Sign in</Text>
+        <Text style={styles.title}>Sign In</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -56,12 +55,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  header: {
-    fontSize: 36,
-    fontWeight: "bold",
-    color: "#000",
-    marginBottom: 20,
-  },
   card: {
     width: "85%",
     backgroundColor: "#F4F0E5",
@@ -75,9 +68,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "#000",
     marginBottom: 20,
+    fontFamily: "Poppins-Bold",
   },
   input: {
     width: "100%",

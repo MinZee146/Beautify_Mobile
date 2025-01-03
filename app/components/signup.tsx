@@ -16,9 +16,9 @@ const SignUp: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Beautify</Text>
+      <Text style={styles.header}>Join us!</Text>
       <View style={styles.card}>
-        <Text style={styles.title}>Sign up</Text>
+        <Text style={styles.title}>Sign Up</Text>
         <TextInput
           style={styles.input}
           placeholder="Full Name"
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 36,
     fontWeight: "bold",
-    color: "#000",
+    color: "#zalo",
     marginBottom: 20,
   },
   card: {
@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "#000",
     marginBottom: 20,
+    fontFamily: "Poppins-Bold",
   },
   input: {
     width: "100%",

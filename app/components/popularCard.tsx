@@ -1,3 +1,4 @@
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Image } from "react-native";
 import { Card, Text, Button, YStack, XStack } from "tamagui";
@@ -55,8 +56,9 @@ const PopularCard: React.FC<PopularCardProps> = ({
           <Text fontWeight="600" fontSize={14} color="#FF6D00">
             {price}$
           </Text>
+          <AntDesign name="star" size={16} color="#FFD700" />
           <Text fontSize={12} color="#6E6E6E">
-            ⭐ {rating} ({reviews})
+            {rating} ({reviews})
           </Text>
         </XStack>
       </YStack>

@@ -30,50 +30,12 @@ const CartItem: React.FC<CartItemProps> = ({
   return (
     <Card padding={8} backgroundColor="$colorTransparent" width="100%">
       <XStack display="flex" justifyContent="space-between">
-        <XStack space={12} alignItems="center">
-          <Image
-            source={{ uri: image }}
-            width={100}
-            height={100}
-            borderRadius={8}
-            resizeMode="cover"
-          />
-          <YStack flex={1}>
-            <Text fontWeight="bold" fontSize={16} marginBottom={4}>
-              {name}
-            </Text>
-            <Text color="#4caf50" fontWeight="bold" fontSize={15}>
-              ${price.toFixed(2)}
-            </Text>
-
-            {/* Quantity Controls */}
-            <XStack alignItems="center" space={8} marginTop={8}>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
-              >
-                <Ionicons name="remove-circle-outline" size={28} color="#000" />
-              </TouchableOpacity>
-              <Text fontSize={15} fontWeight="bold">
-                {quantity}
-              </Text>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                onPress={() => onQuantityChange(quantity + 1)}
-              >
-                <Ionicons name="add-circle-outline" size={28} color="#000" />
-              </TouchableOpacity>
-            </XStack>
-          </YStack>
-        </XStack>
-
-        <YStack
+        <XStack
           display="flex"
-          flexDirection="column"
           justifyContent="space-between"
-          paddingVertical={5}
+          space //dung co xoa cai nay nha
+          alignItems="center"
         >
-          {/* Checkbox */}
           <TouchableOpacity
             activeOpacity={0.6}
             onPress={() => onToggleCheck(id)}
@@ -81,15 +43,50 @@ const CartItem: React.FC<CartItemProps> = ({
             <Ionicons
               name={isChecked ? "checkbox" : "square-outline"}
               size={24}
-              color="#000"
+              color={isChecked ? "#5CB338" : "#BCCCDC"}
             />
           </TouchableOpacity>
+          <XStack space={12} alignItems="center">
+            <Image
+              source={{ uri: image }}
+              width={100}
+              height={100}
+              borderRadius={8}
+              resizeMode="cover"
+            />
+            <YStack flex={1}>
+              <Text fontWeight="bold" fontSize={16} marginBottom={4}>
+                {name}
+              </Text>
+              <Text color="#FF6D00" fontWeight="bold" fontSize={15}>
+                ${price.toFixed(2)}
+              </Text>
 
-          {/* Remove Button */}
-          <TouchableOpacity activeOpacity={0.7} onPress={onRemove}>
-            <Ionicons name="close-circle-outline" size={28} color="#d32f2f" />
-          </TouchableOpacity>
-        </YStack>
+              {/* Quantity Controls */}
+              <XStack alignItems="center" space={8} marginTop={8}>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
+                >
+                  <Ionicons
+                    name="remove-circle-outline"
+                    size={28}
+                    color="#000"
+                  />
+                </TouchableOpacity>
+                <Text fontSize={15} fontWeight="bold">
+                  {quantity}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() => onQuantityChange(quantity + 1)}
+                >
+                  <Ionicons name="add-circle-outline" size={28} color="#000" />
+                </TouchableOpacity>
+              </XStack>
+            </YStack>
+          </XStack>
+        </XStack>
       </XStack>
     </Card>
   );
@@ -231,7 +228,9 @@ const CartPage: React.FC = () => {
                 : "square-outline"
             }
             size={24}
-            color="#000"
+            color={
+              cartItems.every((item) => item.isChecked) ? "#5CB338" : "#BCCCDC"
+            }
           />
         </TouchableOpacity>
       </XStack>

@@ -119,9 +119,9 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#FCFCF7" },
   stickyHeader: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FCFCF7",
     paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
@@ -133,15 +133,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   categoryButton: {
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 16,
     marginHorizontal: 4,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: "#f5f5f5",
+    borderWidth: 1.5,
+    borderColor: "#116A7B",
   },
-  activeCategory: { backgroundColor: "#4CAF50" },
-  categoryText: { color: "#555", fontSize: 14 },
-  activeCategoryText: { color: "#fff", fontWeight: "bold" },
+  activeCategory: {
+    backgroundColor: "#921A40",
+    borderWidth: 0,
+  },
+  categoryText: {
+    color: "#555",
+    fontSize: 14,
+    fontFamily: "Poppins-Bold",
+  },
+  activeCategoryText: { color: "#fff" },
   scrollContainer: {
     paddingBottom: 16,
     paddingHorizontal: 16,

@@ -36,6 +36,7 @@ declare module "@tamagui/core" {
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
     "Playfair Display": require("../assets/fonts/PlayfairDisplay-Regular.ttf"),
   });
 

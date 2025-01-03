@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       width="100%"
       height={120}
       borderRadius={12}
-      backgroundColor="#F5F5ED"
+      backgroundColor="#fffff7"
     >
       <XStack height="100%" gap={12} padding={10}>
         {/* Product Image */}
@@ -59,10 +59,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
               ${price}
             </Text>
             <Button
-              circular
-              size={8}
-              icon={
-                <FontAwesome5 name="shopping-cart" size={16} color="black" />
+              chromeless
+                icon={
+                <FontAwesome5 name="shopping-cart" size={18} color="black" />
               }
             />
           </XStack>
