@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import ProductCard from "../components/productCard";
-import PopularCard from "../components/popularCard";
+import ProductCard from "../components/homePage/productCard";
+import PopularCard from "../components/homePage/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image } from "tamagui";
-import Banner from "../components/banner";
+import Banner from "../components/homePage/banner";
 import Category from "../enities/category";
 import { useRouter } from "expo-router";
 

@@ -36,7 +36,11 @@ const services = [
 ];
 
 const ServiceList = () => {
-  const renderItem = ({ item }) => (
+  const renderItem = ({
+    item,
+  }: {
+    item: { id: string; name: string; description: string; image: string };
+  }) => (
     <View style={styles.card}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.content}>

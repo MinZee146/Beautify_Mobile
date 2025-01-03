@@ -39,13 +39,12 @@ const Banner: React.FC = () => {
       <TextContainer>
         <TitleText>
           "Feel Beautiful,{"\n"}
-          {"\t"}
-          {" "}Be Confident."
+          {"\t"} Be Confident."
         </TitleText>
       </TextContainer>
       <ImageContainer>
         <BannerImage
-          source={require("../../assets/images/model.jpg")}
+          source={require("../../../assets/images/model.jpg")}
           resizeMode="cover"
         />
       </ImageContainer>

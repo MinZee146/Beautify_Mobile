@@ -19,7 +19,12 @@ const CheckoutScreen = () => {
     phoneNumber: "",
   });
 
-  const [voucher, setVoucher] = useState(null);
+  const [voucher, setVoucher] = useState<{
+    id: number;
+    code: string;
+    discount: string;
+    logo: string;
+  } | null>(null);
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const [isVoucherModalVisible, setIsVoucherModalVisible] = useState(false);
   const [isPaymentModalVisible, setIsPaymentModalVisible] = useState(false);
@@ -80,7 +85,12 @@ const CheckoutScreen = () => {
     return total + price * product.quantity;
   }, 0);
 
-  const applyVoucher = (voucher) => {
+  const applyVoucher = (voucher: {
+    id: number;
+    code: string;
+    discount: string;
+    logo: string;
+  }) => {
     setVoucher(voucher);
     setIsVoucherModalVisible(false);
   };
@@ -89,7 +99,7 @@ const CheckoutScreen = () => {
     console.log("Order placed!");
   };
 
-  const handlePaymentMethodChange = (method) => {
+  const handlePaymentMethodChange = (method: React.SetStateAction<string>) => {
     setPaymentMethod(method);
     setIsPaymentModalVisible(false);
   };
