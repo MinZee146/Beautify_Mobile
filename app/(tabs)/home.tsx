@@ -73,7 +73,9 @@ const HomeScreen = () => {
         />
         <XStack gap={16}>
           <AntDesign name="search1" size={24} color="#FBFCD4" />
-          <TouchableOpacity onPress={() => router.push("/components/cart")}>
+          <TouchableOpacity
+            onPress={() => router.push("/components/cartPage/cart")}
+          >
             <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
           </TouchableOpacity>
         </XStack>

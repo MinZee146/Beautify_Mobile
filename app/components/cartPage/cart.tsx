@@ -214,16 +214,16 @@ const CartPage: React.FC = () => {
       <XStack
         padding={12}
         paddingHorizontal={20}
-        backgroundColor="#fff"
+        backgroundColor="#0b0b0b"
         alignItems="center"
         justifyContent="space-between"
         borderBottomWidth={1}
         borderColor="#e0e0e0"
       >
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} />
+          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
         </TouchableOpacity>
-        <Text fontWeight="700" fontSize={18}>
+        <Text fontWeight="700" fontSize={18} color="#FBFCD4">
           My Cart
         </Text>
         <TouchableOpacity onPress={handleToggleSelectAll}>

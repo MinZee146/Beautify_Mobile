@@ -6,17 +6,17 @@ const routes: {
   path: string;
 }[] = [
   { name: "Promo", path: "/promo" },
-  { name: "Sign In", path: "/components/signin" },
-  { name: "Sign Up", path: "/components/signup" },
+  { name: "Sign In", path: "/components/authPage/signin" },
+  { name: "Sign Up", path: "/components/authPage/signup" },
   { name: "Home", path: "/home" },
-  { name: "Product Detail", path: "/components/productDetail" },
-  { name: "Cart", path: "/cart" },
-  { name: "Checkout", path: "/components/checkout" },
-  { name: "Order", path: "/components/order" },
-  { name: "Order Detail", path: "/components/orderDetail" },
-  { name: "Service", path: "/components/service" },
-  { name: "Service Detail", path: "/components/serviceDetail" },
-  { name: "Store Review", path: "/components/storeReview" },
+  { name: "Product Detail", path: "/components/productPage/productDetail" },
+  { name: "Cart", path: "/components/cartPage/cart" },
+  { name: "Checkout", path: "/components/checkoutPage/checkout" },
+  { name: "Order", path: "/components/orderPage/order" },
+  { name: "Order Detail", path: "/components/orderPage/orderDetail" },
+  { name: "Service", path: "/components/servicePage/service" },
+  { name: "Service Detail", path: "/components/servicePage/serviceDetail" },
+  { name: "Store Review", path: "/components/reviewPage/storeReview" },
 ];
 
 export default function Index() {
