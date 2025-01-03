@@ -6,17 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { useRouter } from "expo-router";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Feather from "@expo/vector-icons/Feather";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import ProductCard from "../components/productCard";
-import { XStack } from "tamagui";
 import PopularCard from "../components/popularCard";
 
 const HomeScreen = () => {
-  const router = useRouter();
-
   const products = [
     {
       name: "Promio Body Lotion",
@@ -59,14 +52,6 @@ const HomeScreen = () => {
     <View style={styles.container}>
       {/* Sticky Header */}
       <View style={styles.stickyHeader}>
-        <View style={styles.header}>
-          <Feather name="menu" size={24} color="black" />
-          <XStack gap={16}>
-            <AntDesign name="search1" size={24} color="black" />
-            <Ionicons name="bag-handle-outline" size={24} color="black" />
-          </XStack>
-        </View>
-
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -137,23 +122,15 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   stickyHeader: {
     backgroundColor: "#fff",
-    paddingBottom: 8,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
     zIndex: 1000,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
   },
   categories: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 8,
-    marginBottom: 8,
   },
   categoryButton: {
     paddingVertical: 8,
@@ -185,7 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     columnGap: 10,
     borderRadius: 10,
-    backgroundColor: "transparent", // Không có màu nền
+    backgroundColor: "transparent",
   },
 });
 
