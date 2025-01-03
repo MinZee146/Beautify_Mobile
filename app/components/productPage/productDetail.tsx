@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Swiper from "react-native-swiper";
 import {
   View,
-  Text,
-  Image,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   TextInput,
-  ProgressBarAndroid,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { XStack, Text, Image } from "tamagui";
 
 const ProductDetailScreen = () => {
   const [showMore, setShowMore] = useState(false);
@@ -59,9 +59,31 @@ const ProductDetailScreen = () => {
     return (count / totalReviews) * 100;
   };
 
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {/* Phần trên chứa hình ảnh (Carousel) */}
+      <XStack
+        padding={12}
+        paddingHorizontal={20}
+        backgroundColor="#0b0b0b"
+        alignItems="center"
+        justifyContent="space-between"
+        borderBottomWidth={1}
+      >
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+        <Text fontWeight="700" fontSize={18} color="#FBFCD4">
+          Detail Product
+        </Text>
+        <TouchableOpacity
+          onPress={() => router.push("/components/cartPage/cart")}
+        >
+          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+      </XStack>
       <View style={styles.imageContainer}>
         <Swiper
           style={styles.imageSwiper}

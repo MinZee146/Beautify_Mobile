@@ -1,16 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import ProductCard from "../components/homePage/productCard";
 import PopularCard from "../components/homePage/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { XStack, Image } from "tamagui";
+import { XStack, Image, View, Text, ScrollView } from "tamagui";
 import Banner from "../components/homePage/banner";
 import Category from "../enities/category";
 import { useRouter } from "expo-router";

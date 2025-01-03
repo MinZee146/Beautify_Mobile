@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { YStack, XStack, Text, Image, Card, Separator } from "tamagui";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import {
+  YStack,
+  XStack,
+  Text,
+  Image,
+  Card,
+  Separator,
+  View,
+  ScrollView,
+} from "tamagui";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 
