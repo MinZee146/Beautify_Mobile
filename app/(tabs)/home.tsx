@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import ProductCard from "../components/productCard";
 import PopularCard from "../components/popularCard";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { XStack, Image } from "tamagui";
 
 const HomeScreen = () => {
   const products = [
@@ -51,6 +53,25 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       {/* Sticky Header */}
+      <XStack
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        paddingHorizontal={10}
+        paddingVertical={10}
+        backgroundColor="#0B0B0B"
+      >
+        <Image
+          source={require("../../assets/images/AppIcon.jpg")}
+          width={36}
+          height={36}
+          borderRadius={12}
+        />
+        <XStack gap={16}>
+          <AntDesign name="search1" size={24} color="#FBFCD4" />
+          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+        </XStack>
+      </XStack>
       <View style={styles.stickyHeader}>
         <ScrollView
           horizontal

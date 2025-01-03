@@ -214,9 +214,6 @@ const CartPage: React.FC = () => {
         borderBottomWidth={1}
         borderColor="#e0e0e0"
       >
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
         <Text fontWeight="700" fontSize={18}>
           My Cart
         </Text>

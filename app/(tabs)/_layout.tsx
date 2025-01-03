@@ -1,11 +1,9 @@
 import { Tabs } from "expo-router";
 import { YStack } from "tamagui";
-import TopBar from "../components/topBar";
 
 export default function TabLayout() {
   return (
     <YStack flex={1}>
-      <TopBar />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#000",
