@@ -66,7 +66,13 @@ const CartItem: React.FC<CartItemProps> = ({
               <XStack alignItems="center" space={8} marginTop={8}>
                 <TouchableOpacity
                   activeOpacity={0.6}
-                  onPress={() => onQuantityChange(Math.max(1, quantity - 1))}
+                  onPress={() => {
+                    if (quantity - 1 <= 0) {
+                      onRemove();
+                    } else {
+                      onQuantityChange(quantity - 1);
+                    }
+                  }}
                 >
                   <Ionicons
                     name="remove-circle-outline"
@@ -214,6 +220,9 @@ const CartPage: React.FC = () => {
         borderBottomWidth={1}
         borderColor="#e0e0e0"
       >
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} />
+        </TouchableOpacity>
         <Text fontWeight="700" fontSize={18}>
           My Cart
         </Text>
