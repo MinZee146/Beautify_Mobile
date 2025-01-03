@@ -5,11 +5,14 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import ProductCard from "../components/productCard";
 import PopularCard from "../components/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image } from "tamagui";
+import Banner from "../components/banner";
+import Category from "../enities/category";
 
 const HomeScreen = () => {
   const products = [
@@ -57,8 +60,7 @@ const HomeScreen = () => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
-        paddingHorizontal={10}
-        paddingVertical={10}
+        padding={16}
         backgroundColor="#0B0B0B"
       >
         <Image
@@ -73,53 +75,52 @@ const HomeScreen = () => {
         </XStack>
       </XStack>
       <View style={styles.stickyHeader}>
-        <ScrollView
+        <FlatList
+          data={Category}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              style={[
+                styles.categoryButton,
+                index === 1 && styles.activeCategory,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.categoryText,
+                  index === 1 && styles.activeCategoryText,
+                ]}
+              >
+                {item}
+              </Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item, index) => index.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categories}
-        >
-            (category, index) => (
-              <TouchableOpacity
-                key={index}
-          data={Category}
-                style={[
-                  styles.categoryButton,
-                  index === 1 && styles.activeCategory,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.categoryText,
-                    index === 1 && styles.activeCategoryText,
-                  ]}
-                >
-                  {category}
-                </Text>
-              </TouchableOpacity>
-            )
-          )}
-        </ScrollView>
+        />
       </View>
 
       {/* Product List */}
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView>
+        <Banner />
         <Text style={styles.sectionTitle}>Popular</Text>
-        <ScrollView
+        <FlatList
+          data={products}
+          renderItem={({ item }) => (
+            <PopularCard
+              name={item.name}
+              image={item.image}
+              price={item.price}
+              rating={item.rating}
+              reviews={item.reviews}
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.popularList}
-        >
-          {products.map((product, index) => (
-            <PopularCard
-              key={index}
-              name={product.name}
-              image={product.image}
-              price={product.price}
-              rating={product.rating}
-              reviews={product.reviews}
-            />
-          ))}
-        </ScrollView>
+        />
 
         <Text style={styles.sectionTitle}>Products</Text>
         <View style={styles.productList}>
@@ -151,13 +152,13 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
   categoryButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     marginHorizontal: 4,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#f5f5f5",
     borderWidth: 1.5,
     borderColor: "#116A7B",
@@ -172,10 +173,6 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Bold",
   },
   activeCategoryText: { color: "#fff" },
-  scrollContainer: {
-    paddingBottom: 16,
-    paddingHorizontal: 16,
-  },
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
