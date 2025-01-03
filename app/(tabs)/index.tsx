@@ -1,7 +1,10 @@
-import { Link, Route } from "expo-router";
+import { Link, LinkProps } from "expo-router";
 import { Text, View } from "react-native";
 
-const routes: { name: string; path: Route }[] = [
+const routes: {
+  name: string;
+  path: string;
+}[] = [
   { name: "Promo", path: "/promo" },
   { name: "Sign In", path: "/components/signin" },
   { name: "Sign Up", path: "/components/signup" },
@@ -30,7 +33,7 @@ export default function Index() {
         About Screen
       </Text>
       {routes.map((route, index) => (
-        <Link key={index} href={route.path}>
+        <Link key={index} href={route.path as LinkProps["href"]}>
           {route.name}
         </Link>
       ))}
