@@ -11,6 +11,8 @@ const routes: { name: string; path: Route }[] = [
   { name: "Checkout", path: "/components/checkout" },
   { name: "Order", path: "/components/order" },
   { name: "Order Detail", path: "/components/orderDetail" },
+  { name: "Service", path: "/components/service" },
+  { name: "Service Detail", path: "/components/serviceDetail" },
 ];
 
 export default function Index() {
