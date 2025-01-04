@@ -20,6 +20,7 @@ const PopularCard: React.FC<PopularCardProps> = ({
 }) => {
   return (
     <Card
+      margin={3}
       elevate
       elevation={2}
       borderRadius={16}

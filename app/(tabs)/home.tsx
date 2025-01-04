@@ -103,9 +103,16 @@ const HomeScreen = () => {
       {/* Product List */}
       <ScrollView paddingHorizontal="6">
         <Banner />
-        <Text style={styles.sectionTitle}>Popular ----------------------------</Text>
+        <Text style={styles.sectionTitle}>
+          Popular ----------------------------
+        </Text>
         <FlatList
-          style={{ paddingBottom: 8, paddingLeft: 5, paddingTop: 3, paddingRight: 5 }}
+          style={{
+            paddingBottom: 8,
+            paddingLeft: 5,
+            paddingTop: 3,
+            paddingRight: 5,
+          }}
           data={products}
           renderItem={({ item }) => (
             <PopularCard
@@ -122,7 +129,9 @@ const HomeScreen = () => {
           contentContainerStyle={styles.popularList}
         />
 
-        <Text style={styles.sectionTitle}>Products ---------------------------</Text>
+        <Text style={styles.sectionTitle}>
+          Products ---------------------------
+        </Text>
         <View style={styles.productList}>
           {products.map((product, index) => (
             <ProductCard
@@ -143,10 +152,10 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#FCFCF7" },
   stickyHeader: {
-    backgroundColor: "#FCFCF7",
+    backgroundColor: "#E3D7CB",
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: "#FCFCF7",
     zIndex: 1000,
   },
   categories: {
@@ -161,11 +170,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#FCFCF7",
     borderWidth: 1.5,
-    borderColor: "#116A7B",
+    borderColor: "#272B2E",
   },
   activeCategory: {
-    backgroundColor: "#921A40",
-    borderWidth: 0,
+    backgroundColor: "#272B2E",
   },
   categoryText: {
     color: "#555",
@@ -177,6 +185,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginVertical: 15,
+    color: "#272B2E",
   },
   productList: {
     flexDirection: "row",

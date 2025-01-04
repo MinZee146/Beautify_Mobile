@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swiper from "react-native-swiper";
 import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { XStack, Text, Image, YStack, View } from "tamagui";
 import ProductReview, { sampleReviews } from "@/app/enities/productReview";
@@ -111,8 +111,8 @@ const ProductDetailScreen = () => {
           <Text style={styles.productPrice}>{product.price}</Text>
 
           <Text style={styles.productRating}>
-            <Ionicons name="star" color="#FAAF00" size={14} /> {product.rating}
-            <Text fontWeight={500}> ({product.reviews})</Text>
+            <AntDesign name="star" size={14} color="#FFD700" /> {product.rating}
+            <Text fontWeight={200}> ({product.reviews} reviews)</Text>
           </Text>
           <Text style={styles.productDescription}>
             {showMore
@@ -155,15 +155,13 @@ const ProductDetailScreen = () => {
                 <Text style={styles.totalRatingText}>{product.rating}</Text>
                 <View style={styles.starContainer}>
                   {Array.from({ length: 5 }, (_, index) => (
-                    <Ionicons
+                    <AntDesign
                       key={index}
                       name={
-                        index < Math.floor(product.rating)
-                          ? "star"
-                          : "star-outline"
+                        index < Math.floor(product.rating) ? "star" : "staro"
                       }
                       size={20}
-                      color="#000"
+                      color="#FFD700"
                     />
                   ))}
                 </View>
@@ -174,7 +172,7 @@ const ProductDetailScreen = () => {
                 {Object.entries(product.ratingsCount).map(([rating, count]) => (
                   <View key={rating} style={styles.ratingItem}>
                     <Text style={styles.ratingText}>
-                      {rating} <Ionicons name="star" color="#000" />{" "}
+                      {rating} <AntDesign name="star" color="#FFD700" />{" "}
                       <Text style={styles.ratingCount}>({count})</Text>
                     </Text>
                   </View>
@@ -232,7 +230,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   productName: {
-    fontSize: 20,
+    fontSize: 26,
     fontWeight: "bold",
     flex: 1,
   },
@@ -247,21 +245,23 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   brandItem: {
-    backgroundColor: "#76A188",
-    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#76A188",
+    borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 16,
     marginRight: 8,
   },
   categoryItem: {
-    backgroundColor: "#76A188",
-    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#76A188",
+    borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 16,
   },
   tagText: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: "#76A188",
     fontWeight: "bold",
   },
   productRating: {
@@ -337,6 +337,7 @@ const styles = StyleSheet.create({
   ratingPocessing: {
     flex: 4,
     justifyContent: "center",
+    marginRight: 16,
   },
   reviewHeader: {
     flexDirection: "row",
@@ -444,7 +445,8 @@ const ReviewCard = ({
           </View>
         </View>
         <Text style={{ fontSize: 20, color: "#FAAF00", fontWeight: "bold" }}>
-          <Ionicons name="star" color="#FAAF00" size={16} /> {rating.toFixed(2)}
+          <AntDesign name="star" size={14} color="#FFD700" />{" "}
+          {rating.toFixed(2)}
         </Text>
       </View>
       <View style={{ flex: 1 }}>
