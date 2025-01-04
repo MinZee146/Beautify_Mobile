@@ -2,22 +2,13 @@ import React from "react";
 import { Card, Text, Image, Button, XStack, YStack } from "tamagui";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Product from "@/app/enities/Product";
 
-type ProductCardProps = {
-  name: string;
-  image: string;
-  price: string;
-  rating: number;
-  reviews: number;
-};
+interface ProductCardProps {
+  product: Product;
+}
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  name,
-  image,
-  price,
-  rating,
-  reviews,
-}) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card
       elevate
@@ -30,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <XStack height="100%" gap={12} padding={10}>
         {/* Product Image */}
         <Image
-          source={{ uri: image }}
+          source={{ uri: product.image }}
           width={100}
           height="100%"
           borderRadius={8}
@@ -48,7 +39,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <XStack alignItems="center" gap={6}>
               <AntDesign name="star" size={14} color="#FFD700" />
               <Text fontSize={14} color="#6E6E6E">
-                {rating} ({reviews} review{reviews > 1 ? "s" : ""})
+                {product.rating} ({product.reviews} review
+                {product.reviews > 1 ? "s" : ""})
               </Text>
             </XStack>
           </YStack>
@@ -56,11 +48,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Price and Add to Cart Button */}
           <XStack justifyContent="space-between" alignItems="center">
             <Text fontSize={18} fontWeight="600" color="#FF6D00">
-              ${price}
+              ${product.price}
             </Text>
             <Button
               chromeless
-                icon={
+              icon={
                 <FontAwesome5 name="shopping-cart" size={18} color="black" />
               }
             />

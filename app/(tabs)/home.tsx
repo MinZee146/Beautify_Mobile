@@ -5,48 +5,12 @@ import PopularCard from "../components/homePage/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image, View, Text, ScrollView } from "tamagui";
 import Banner from "../components/homePage/banner";
-import sampleCategories from "../enities/category";
 import { useRouter } from "expo-router";
+import { sampleProducts } from "../enities/Product";
+import { sampleCategories } from "../enities/category";
 
 const HomeScreen = () => {
   const router = useRouter();
-  const products = [
-    {
-      name: "Promio Body Lotion",
-      image: "https://via.placeholder.com/150",
-      price: "29.99",
-      rating: 4.5,
-      reviews: 120,
-    },
-    {
-      name: "Natural Organ Oil",
-      image: "https://via.placeholder.com/150",
-      price: "49.99",
-      rating: 4.8,
-      reviews: 200,
-    },
-    {
-      name: "Skin Oil Serum",
-      image: "https://via.placeholder.com/150",
-      price: "39.99",
-      rating: 4.7,
-      reviews: 180,
-    },
-    {
-      name: "Face Cream",
-      image: "https://via.placeholder.com/150",
-      price: "19.99",
-      rating: 4.3,
-      reviews: 80,
-    },
-    {
-      name: "Moisturizing Lotion",
-      image: "https://via.placeholder.com/150",
-      price: "24.99",
-      rating: 4.6,
-      reviews: 95,
-    },
-  ];
 
   return (
     <View style={styles.container}>
@@ -93,9 +57,8 @@ const HomeScreen = () => {
               </Text>
             </TouchableOpacity>
           )}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(_, index) => index.toString()}
           horizontal
-          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categories}
         />
       </View>
@@ -113,17 +76,9 @@ const HomeScreen = () => {
             paddingTop: 3,
             paddingRight: 5,
           }}
-          data={products}
-          renderItem={({ item }) => (
-            <PopularCard
-              name={item.name}
-              image={item.image}
-              price={item.price}
-              rating={item.rating}
-              reviews={item.reviews}
-            />
-          )}
-          keyExtractor={(item, index) => index.toString()}
+          data={sampleProducts}
+          renderItem={({ item }) => <PopularCard product={item} />}
+          keyExtractor={(_, index) => index.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.popularList}
@@ -133,15 +88,8 @@ const HomeScreen = () => {
           Products ---------------------------
         </Text>
         <View style={styles.productList}>
-          {products.map((product, index) => (
-            <ProductCard
-              key={index}
-              name={product.name}
-              image={product.image}
-              price={product.price}
-              rating={product.rating}
-              reviews={product.reviews}
-            />
+          {sampleProducts.map((product, index) => (
+            <ProductCard key={index} product={product} />
           ))}
         </View>
       </ScrollView>

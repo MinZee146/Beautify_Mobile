@@ -6,5 +6,3 @@ export const sampleCategories = [
   "Skincare",
   "Fragrance",
 ];
-
-export default sampleCategories;

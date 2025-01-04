@@ -1,23 +1,14 @@
+import Product from "@/app/enities/Product";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Image } from "react-native";
-import { Card, Text, Button, YStack, XStack } from "tamagui";
+import { Card, Text, YStack, XStack } from "tamagui";
 
 interface PopularCardProps {
-  image: string;
-  name: string;
-  price: string;
-  rating: number;
-  reviews: number;
+  product: Product;
 }
 
-const PopularCard: React.FC<PopularCardProps> = ({
-  image,
-  name,
-  price,
-  rating,
-  reviews,
-}) => {
+const PopularCard = ({ product }: PopularCardProps) => {
   return (
     <Card
       margin={3}
@@ -31,7 +22,7 @@ const PopularCard: React.FC<PopularCardProps> = ({
       {/* Hình ảnh */}
       <Card.Header padding={0}>
         <Image
-          source={{ uri: image }}
+          source={{ uri: product.image }}
           style={{
             width: "100%",
             height: 140,
@@ -56,11 +47,11 @@ const PopularCard: React.FC<PopularCardProps> = ({
         {/* Giá và Đánh giá */}
         <XStack justifyContent="space-between" alignItems="center">
           <Text fontWeight="600" fontSize={14} color="#FF6D00">
-            {price}$
+            {product.price}$
           </Text>
           <AntDesign name="star" size={16} color="#FFD700" />
           <Text fontSize={12} color="#6E6E6E">
-            {rating} ({reviews})
+            {product.rating} ({product.reviews})
           </Text>
         </XStack>
       </YStack>
