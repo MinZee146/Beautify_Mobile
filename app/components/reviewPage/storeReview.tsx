@@ -4,12 +4,10 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TextInput,
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Rating } from "react-native-ratings";
-import { ProgressBar } from "react-native-paper";
 
 const CommentScreen = () => {
   const [comments, setComments] = useState([
@@ -31,37 +29,17 @@ const CommentScreen = () => {
 
   const [newComment, setNewComment] = useState("");
   const [newRating, setNewRating] = useState(5);
-  const [showAddComment, setShowAddComment] = useState(false); // To toggle visibility of add comment section
+  const [showAddComment, setShowAddComment] = useState(false);
 
   const calculateRatingsSummary = () => {
     const totalReviews = comments.length;
-    const productQuality = 4.5; // Placeholder, can be calculated dynamically
-    const serviceQuality = 4.0; // Placeholder
-    const deliveryQuality = 4.7; // Placeholder
+    const productQuality = 4.5;
+    const serviceQuality = 4.0;
+    const deliveryQuality = 4.7;
     return { productQuality, serviceQuality, deliveryQuality, totalReviews };
   };
 
   const ratingsSummary = calculateRatingsSummary();
-
-  const handleAddComment = () => {
-    if (!newComment.trim()) {
-      alert("Vui lòng nhập bình luận.");
-      return;
-    }
-
-    const newCommentData = {
-      id: (comments.length + 1).toString(),
-      name: "Khách hàng", // Placeholder name
-      rating: newRating,
-      comment: newComment,
-      date: new Date().toISOString().split("T")[0], // Current date
-    };
-
-    setComments([newCommentData, ...comments]);
-    setNewComment("");
-    setNewRating(5);
-    setShowAddComment(false); // Hide comment section after submitting
-  };
 
   const renderComment = ({ item }) => (
     <View style={styles.commentItem}>
@@ -84,57 +62,115 @@ const CommentScreen = () => {
       {/* Header */}
       <View style={styles.header}>
         <Ionicons name="arrow-back" size={24} color="black" />
-        <Text style={styles.headerTitle}>Bình luận</Text>
+        <Text style={styles.headerTitle}>Bài đánh giá</Text>
       </View>
 
-      {/* Overall Rating */}
-      <View style={styles.overallRating}>
-        <Text style={styles.overallRatingText}>4.5/5</Text>
-        <Rating
-          startingValue={4.5}
-          readonly
-          imageSize={20}
-          style={{ marginVertical: 10 }}
-        />
-        <Text style={styles.totalReviews}>
-          {ratingsSummary.totalReviews} đánh giá
-        </Text>
-      </View>
+      {/* Rating Summary and Criteria */}
+      <View style={styles.ratingContainer}>
+        <View style={styles.overallRatingSection}>
+          <Text style={styles.overallRatingText}>4.5</Text>
+          <Rating
+            startingValue={4.5}
+            readonly
+            imageSize={20}
+            style={{ marginVertical: 5 }}
+          />
+          <Text style={styles.totalReviews}>653 đánh giá</Text>
+        </View>
 
-      {/* Rating Criteria */}
-      <View style={styles.ratingCriteria}>
-        <View style={styles.criteriaRow}>
-          <Text style={styles.criteriaLabel}>Product Quality</Text>
-          <ProgressBar
-            progress={ratingsSummary.productQuality / 5}
-            color="#4CAF50"
-            style={styles.progressBar}
-          />
-          <Text style={styles.criteriaValue}>
-            {ratingsSummary.productQuality}/5
-          </Text>
-        </View>
-        <View style={styles.criteriaRow}>
-          <Text style={styles.criteriaLabel}>Service Quality</Text>
-          <ProgressBar
-            progress={ratingsSummary.serviceQuality / 5}
-            color="#FF9800"
-            style={styles.progressBar}
-          />
-          <Text style={styles.criteriaValue}>
-            {ratingsSummary.serviceQuality}/5
-          </Text>
-        </View>
-        <View style={styles.criteriaRow}>
-          <Text style={styles.criteriaLabel}>Delivery Quality</Text>
-          <ProgressBar
-            progress={ratingsSummary.deliveryQuality / 5}
-            color="#2196F3"
-            style={styles.progressBar}
-          />
-          <Text style={styles.criteriaValue}>
-            {ratingsSummary.deliveryQuality}/5
-          </Text>
+        <View style={styles.criteriaRatingSection}>
+          <View style={styles.criteriaRow}>
+            <Text style={styles.criteriaLabel}>Product Quality</Text>
+          </View>
+          <View style={styles.progressRow}>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${(ratingsSummary.productQuality / 5) * 100}%`,
+                    backgroundColor: "#4CAF50", // Màu xanh cho phần đã đánh giá
+                  },
+                ]}
+              />
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${
+                      100 - (ratingsSummary.productQuality / 5) * 100
+                    }%`,
+                    backgroundColor: "#ccc", // Màu xám cho phần chưa đánh giá
+                  },
+                ]}
+              />
+            </View>
+            <Text style={styles.criteriaValue}>
+              {ratingsSummary.productQuality}/5
+            </Text>
+          </View>
+
+          <View style={styles.criteriaRow}>
+            <Text style={styles.criteriaLabel}>Service Quality</Text>
+          </View>
+          <View style={styles.progressRow}>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${(ratingsSummary.serviceQuality / 5) * 100}%`,
+                    backgroundColor: "#4CAF50",
+                  },
+                ]}
+              />
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${
+                      100 - (ratingsSummary.serviceQuality / 5) * 100
+                    }%`,
+                    backgroundColor: "#ccc",
+                  },
+                ]}
+              />
+            </View>
+            <Text style={styles.criteriaValue}>
+              {ratingsSummary.serviceQuality}/5
+            </Text>
+          </View>
+
+          <View style={styles.criteriaRow}>
+            <Text style={styles.criteriaLabel}>Delivery Quality</Text>
+          </View>
+          <View style={styles.progressRow}>
+            <View style={styles.progressBar}>
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${(ratingsSummary.deliveryQuality / 5) * 100}%`,
+                    backgroundColor: "#4CAF50",
+                  },
+                ]}
+              />
+              <View
+                style={[
+                  styles.progressFill,
+                  {
+                    width: `${
+                      100 - (ratingsSummary.deliveryQuality / 5) * 100
+                    }%`,
+                    backgroundColor: "#ccc",
+                  },
+                ]}
+              />
+            </View>
+            <Text style={styles.criteriaValue}>
+              {ratingsSummary.deliveryQuality}/5
+            </Text>
+          </View>
         </View>
       </View>
 
@@ -146,60 +182,15 @@ const CommentScreen = () => {
         contentContainerStyle={styles.commentList}
       />
 
-      {/* Add Comment Section (Initially hidden) */}
-      {showAddComment && (
-        <View style={styles.addCommentContainer}>
-          <Text style={styles.addCommentTitle}>Viết bình luận</Text>
-
-          {/* Rating for 3 criteria */}
-          <View style={styles.ratingCriteria}>
-            <Text style={styles.criteriaLabel}>Product Quality</Text>
-            <Rating
-              startingValue={newRating}
-              onFinishRating={(rating) => setNewRating(rating)}
-              imageSize={24}
-              style={styles.ratingStars}
-            />
-            <Text style={styles.criteriaLabel}>Service Quality</Text>
-            <Rating
-              startingValue={newRating}
-              onFinishRating={(rating) => setNewRating(rating)}
-              imageSize={24}
-              style={styles.ratingStars}
-            />
-            <Text style={styles.criteriaLabel}>Delivery Quality</Text>
-            <Rating
-              startingValue={newRating}
-              onFinishRating={(rating) => setNewRating(rating)}
-              imageSize={24}
-              style={styles.ratingStars}
-            />
-          </View>
-
-          <TextInput
-            style={styles.commentInput}
-            placeholder="Nhập bình luận của bạn..."
-            value={newComment}
-            onChangeText={setNewComment}
-          />
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={handleAddComment}
-          >
-            <Text style={styles.submitButtonText}>Gửi</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* Button to toggle the visibility of the add comment section */}
-      {!showAddComment && (
-        <TouchableOpacity
-          style={styles.addCommentButton}
-          onPress={() => setShowAddComment(true)}
-        >
-          <Text style={styles.addCommentButtonText}>Thêm Bình Luận</Text>
-        </TouchableOpacity>
-      )}
+      {/* Add Comment Button */}
+      <TouchableOpacity
+        style={styles.addCommentButton}
+        onPress={() => setShowAddComment(!showAddComment)}
+      >
+        <Text style={styles.addCommentButtonText}>
+          {showAddComment ? "Ẩn" : "Thêm Bình Luận"}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -221,45 +212,61 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 10,
   },
-  overallRating: {
-    alignItems: "center",
-    padding: 20,
+  ratingContainer: {
+    flexDirection: "row",
+    padding: 15,
     backgroundColor: "#fff",
+    marginVertical: 5,
     marginBottom: 10,
+    alignItems: "center",
+    borderRadius: 8,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  overallRatingSection: {
+    width: "40%",
+    alignItems: "center",
   },
   overallRatingText: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
   },
   totalReviews: {
+    marginVertical: 5,
     color: "#777",
   },
-  ratingCriteria: {
-    marginTop: 20,
-    width: "100%",
+  criteriaRatingSection: {
+    flex: 1,
+    paddingLeft: 15,
   },
   criteriaRow: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   criteriaLabel: {
-    flex: 2,
     fontSize: 14,
-    color: "#333",
+    fontWeight: "bold",
+  },
+  progressRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
   },
   progressBar: {
-    width: 200, // Fixed width
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 10,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#ccc",
+    flex: 1,
+    marginVertical: 5,
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 3,
   },
   criteriaValue: {
-    flex: 1,
     fontSize: 14,
-    textAlign: "right",
-    color: "#555",
+    fontWeight: "bold",
+    marginLeft: 10,
   },
   commentList: {
     paddingHorizontal: 15,
@@ -278,60 +285,19 @@ const styles = StyleSheet.create({
   },
   commentName: {
     fontWeight: "bold",
-    fontSize: 16,
   },
   commentText: {
     marginVertical: 5,
-    fontSize: 14,
-    color: "#333",
   },
   commentDate: {
     fontSize: 12,
     color: "#888",
   },
-  addCommentContainer: {
-    padding: 15,
-    backgroundColor: "#fff",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    elevation: 2,
-  },
-  addCommentTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  ratingStars: {
-    marginVertical: 5,
-  },
-  commentInput: {
-    height: 80,
-    borderColor: "#ddd",
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-    textAlignVertical: "top",
-    marginBottom: 10,
-  },
-  submitButton: {
-    backgroundColor: "#4CAF50",
-    borderRadius: 8,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  submitButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
   addCommentButton: {
     backgroundColor: "#4CAF50",
-    paddingVertical: 12,
-    marginBottom: 10,
-    marginHorizontal: 15,
+    padding: 12,
     borderRadius: 8,
+    margin: 15,
     alignItems: "center",
   },
   addCommentButtonText: {
