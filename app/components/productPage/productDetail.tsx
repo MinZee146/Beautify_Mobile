@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import Swiper from "react-native-swiper";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { XStack, Text, Image } from "tamagui";
+import { XStack, Text, Image, YStack, View } from "tamagui";
+import ProductReview, { sampleReviews } from "@/app/enities/productReview";
 
 const ProductDetailScreen = () => {
   const [showMore, setShowMore] = useState(false);
@@ -116,7 +111,8 @@ const ProductDetailScreen = () => {
           <Text style={styles.productPrice}>{product.price}</Text>
 
           <Text style={styles.productRating}>
-            Rating: {product.rating} ⭐ ({product.reviews} reviews)
+            <Ionicons name="star" color="#FAAF00" size={14} /> {product.rating}
+            <Text fontWeight={500}> ({product.reviews})</Text>
           </Text>
           <Text style={styles.productDescription}>
             {showMore
@@ -134,35 +130,18 @@ const ProductDetailScreen = () => {
           {/* Khối nút Add to Cart và điều chỉnh số lượng */}
           <View style={styles.cartSection}>
             <TouchableOpacity style={styles.addToCartButton}>
-              <Text style={styles.addToCartText}>Add to Cart</Text>
+              <Text style={styles.addToCartText}>ADD TO CART</Text>
             </TouchableOpacity>
-
-            {/* Phần tăng giảm số lượng */}
-            <View style={styles.quantityContainer}>
-              <TouchableOpacity
-                onPress={decreaseQuantity}
-                style={styles.quantityButton}
-              >
-                <Text style={styles.quantityText}>-</Text>
-              </TouchableOpacity>
-              <TextInput
-                style={styles.quantityInput}
-                value={String(quantity)}
-                keyboardType="numeric"
-                editable={false}
-              />
-              <TouchableOpacity
-                onPress={increaseQuantity}
-                style={styles.quantityButton}
-              >
-                <Text style={styles.quantityText}>+</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.buyButton}>
+              <Text style={styles.buyText}>BUY NOW</Text>
+            </TouchableOpacity>
           </View>
+        </View>
 
-          {/* Phần Tổng Review */}
-          <View style={styles.commentSection}>
-            {/* Số lượng review và Write Review button */}
+        {/* Phần Tổng Review */}
+        <View style={{ backgroundColor: "#F5F6F8", padding: 16 }}>
+          {/* Số lượng review và Write Review button */}
+          <YStack>
             <View style={styles.reviewHeader}>
               <Text style={styles.reviewCount}>{product.reviews} Reviews</Text>
               <TouchableOpacity style={styles.writeReviewButton}>
@@ -170,27 +149,48 @@ const ProductDetailScreen = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Hiển thị tổng số rating lớn bên trái */}
-            <View style={styles.ratingStats}>
-              <Text style={styles.totalRatingText}>{product.rating} ⭐</Text>
+            <View style={styles.ratingStatsContainer}>
+              {/* Bên trái: Tổng số rating */}
+              <View style={styles.totalRatingContainer}>
+                <Text style={styles.totalRatingText}>{product.rating}</Text>
+                <View style={styles.starContainer}>
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <Ionicons
+                      key={index}
+                      name={
+                        index < Math.floor(product.rating)
+                          ? "star"
+                          : "star-outline"
+                      }
+                      size={20}
+                      color="#000"
+                    />
+                  ))}
+                </View>
+              </View>
 
-              {/* Thống kê rating (1, 2, 3, 4, 5 sao) nằm bên phải */}
+              {/* Bên phải: Phân phối rating */}
               <View style={styles.ratingDistribution}>
                 {Object.entries(product.ratingsCount).map(([rating, count]) => (
                   <View key={rating} style={styles.ratingItem}>
                     <Text style={styles.ratingText}>
-                      {rating} ⭐
-                      <Text style={styles.ratingCount}> ({count})</Text>
+                      {rating} <Ionicons name="star" color="#000" />{" "}
+                      <Text style={styles.ratingCount}>({count})</Text>
                     </Text>
-
-                    {/* Thanh tiến trình cho mức độ đánh giá */}
+                  </View>
+                ))}
+              </View>
+              <View style={styles.ratingPocessing}>
+                {Object.entries(product.ratingsCount).map(([rating, count]) => (
+                  <View key={rating} style={styles.ratingItem}>
+                    <Text style={styles.ratingText}></Text>
                     <View style={styles.progressBarContainer}>
                       <View
                         style={[
                           styles.progressBar,
                           {
                             width: `${getRatingPercentage(
-                              rating as unknown as 1 | 2 | 3 | 4 | 5
+                              rating as unknown as keyof typeof product.ratingsCount
                             )}%`,
                           },
                         ]}
@@ -200,35 +200,19 @@ const ProductDetailScreen = () => {
                 ))}
               </View>
             </View>
-          </View>
-
-          {/* Phần thông tin Review của User (mới thêm) */}
-          <View style={styles.userReviews}>
-            {/* 1. Thông tin user và nút chỉnh sửa */}
-            <View style={styles.userHeader}>
-              <View style={styles.userInfo}>
-                <Text style={styles.userName}>User Name</Text>
-                <Text style={styles.userEmail}>user@example.com</Text>
-              </View>
-              <TouchableOpacity style={styles.optionsButton}>
-                <Text style={styles.optionsText}>...</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* 2. Ngôi sao và tiêu đề đánh giá */}
-            <View style={styles.ratingWithTitle}>
-              <Text style={styles.starRating}>⭐⭐⭐⭐⭐</Text>
-              <Text style={styles.reviewTitle}>Great Product!</Text>
-            </View>
-
-            {/* 3. Comment và thời gian */}
-            <View style={styles.commentWithTime}>
-              <Text style={styles.userComment}>
-                This is a great product, totally worth the price. Highly
-                recommended!
-              </Text>
-              <Text style={styles.reviewTime}>2 hours ago</Text>
-            </View>
+          </YStack>
+          <View paddingTop={16}>
+            {sampleReviews.map((review, index) => (
+              <ReviewCard
+                key={index}
+                userName={review.userName}
+                userEmail={review.userEmail}
+                userImage={review.userImage}
+                rating={review.rating}
+                title={review.title}
+                comment={review.comment}
+              />
+            ))}
           </View>
         </View>
       </ScrollView>
@@ -248,44 +232,43 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   productName: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     flex: 1,
-    marginBottom: 4,
   },
   productPrice: {
     fontSize: 20,
     color: "#e91e63",
     fontWeight: "bold",
-    marginBottom: 4,
   },
   tagContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 4,
   },
   brandItem: {
-    backgroundColor: "#e3f2fd",
+    backgroundColor: "#76A188",
     borderRadius: 24,
     paddingVertical: 10,
     paddingHorizontal: 16,
     marginRight: 8,
   },
   categoryItem: {
-    backgroundColor: "#f1f1f1",
+    backgroundColor: "#76A188",
     borderRadius: 24,
     paddingVertical: 10,
     paddingHorizontal: 16,
   },
   tagText: {
     fontSize: 14,
-    color: "#444",
+    color: "#FFFFFF",
     fontWeight: "bold",
   },
   productRating: {
     fontSize: 16,
-    color: "#888",
-    marginBottom: 8,
+    color: "#000",
+    fontWeight: "700",
+    marginBottom: 12,
   },
   productDescription: {
     fontSize: 16,
@@ -303,47 +286,57 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   addToCartButton: {
-    backgroundColor: "#e91e63",
+    backgroundColor: "#2E7D32",
     padding: 12,
-    borderRadius: 8,
-    width: "50%",
+    borderRadius: 12,
     alignItems: "center",
+    flex: 1,
   },
   addToCartText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
   },
-  quantityContainer: {
-    flexDirection: "row",
+  buyButton: {
+    backgroundColor: "#fff",
+    padding: 11,
+    borderRadius: 12,
     alignItems: "center",
-    marginLeft: 16,
-  },
-  quantityButton: {
-    backgroundColor: "#e91e63",
-    padding: 8,
-    borderRadius: 8,
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  quantityText: {
-    color: "#fff",
-    fontSize: 20,
-  },
-  quantityInput: {
-    width: 50,
-    textAlign: "center",
-    fontSize: 18,
-    padding: 8,
-    marginHorizontal: 8,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
+    borderColor: "#0288D1",
+    flex: 1,
   },
-  commentSection: {
-    marginTop: 24,
+  buyText: {
+    color: "#0288D1",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  ratingStatsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginTop: 12,
+  },
+  totalRatingContainer: {
+    flex: 3,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    paddingBottom: 16,
+  },
+  starContainer: {
+    flexDirection: "row",
+    marginTop: 4,
+  },
+  ratingDistribution: {
+    flex: 2,
+    justifyContent: "center",
+  },
+  ratingPocessing: {
+    flex: 4,
+    justifyContent: "center",
   },
   reviewHeader: {
     flexDirection: "row",
@@ -351,16 +344,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   reviewCount: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
   writeReviewButton: {
-    backgroundColor: "#007bff",
-    padding: 10,
+    backgroundColor: "#fff",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     borderRadius: 8,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#0288D1",
   },
   writeReviewText: {
-    color: "#fff",
+    color: "#0288D1",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -374,10 +371,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     color: "#444",
-  },
-  ratingDistribution: {
-    flexDirection: "column",
-    justifyContent: "center",
   },
   ratingItem: {
     flexDirection: "row",
@@ -404,63 +397,64 @@ const styles = StyleSheet.create({
     backgroundColor: "#4caf50",
     borderRadius: 8,
   },
-
-  // New User Reviews Section Styles
-  userReviews: {
-    marginTop: 16,
-  },
-  userHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  userInfo: {
-    flexDirection: "row",
-  },
-  userName: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  userEmail: {
-    fontSize: 14,
-    color: "#777",
-    marginLeft: 8,
-  },
-  optionsButton: {
-    padding: 8,
-  },
-  optionsText: {
-    fontSize: 20,
-  },
-  ratingWithTitle: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 8,
-  },
-  starRating: {
-    fontSize: 16,
-    color: "#FFD700",
-  },
-  reviewTitle: {
-    fontSize: 16,
-    marginLeft: 8,
-    fontWeight: "bold",
-  },
-  commentWithTime: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 8,
-  },
-  userComment: {
-    fontSize: 14,
-    color: "#444",
-    flex: 1,
-  },
-  reviewTime: {
-    fontSize: 12,
-    color: "#777",
-    marginLeft: 8,
-  },
 });
 
 export default ProductDetailScreen;
+
+const ReviewCard = ({
+  userName,
+  userEmail,
+  userImage,
+  rating,
+  title,
+  comment,
+}: ProductReview) => {
+  return (
+    <View
+      style={{
+        flexDirection: "column",
+        padding: 16,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 24,
+        marginBottom: 16,
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image
+            source={userImage}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              marginRight: 12,
+            }}
+          />
+          <View>
+            <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 2 }}>
+              {userName}
+            </Text>
+            <Text style={{ fontSize: 13, color: "#888" }}>{userEmail}</Text>
+          </View>
+        </View>
+        <Text style={{ fontSize: 20, color: "#FAAF00", fontWeight: "bold" }}>
+          <Ionicons name="star" color="#FAAF00" size={16} /> {rating.toFixed(2)}
+        </Text>
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: 8 }}>
+          {title}
+        </Text>
+        <Text style={{ fontSize: 14, color: "#444", marginTop: 4 }}>
+          {comment}
+        </Text>
+      </View>
+    </View>
+  );
+};

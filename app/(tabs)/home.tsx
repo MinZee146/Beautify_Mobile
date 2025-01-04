@@ -5,7 +5,7 @@ import PopularCard from "../components/homePage/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image, View, Text, ScrollView } from "tamagui";
 import Banner from "../components/homePage/banner";
-import Category from "../enities/category";
+import sampleCategories from "../enities/category";
 import { useRouter } from "expo-router";
 
 const HomeScreen = () => {
@@ -75,7 +75,7 @@ const HomeScreen = () => {
       </XStack>
       <View style={styles.stickyHeader}>
         <FlatList
-          data={Category}
+          data={sampleCategories}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               style={[

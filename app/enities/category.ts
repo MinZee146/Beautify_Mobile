@@ -1,4 +1,4 @@
-const Category = [
+export const sampleCategories = [
   "Sunscreen",
   "Serum",
   "Cleanser",
@@ -7,4 +7,4 @@ const Category = [
   "Fragrance",
 ];
 
-export default Category;
+export default sampleCategories;
