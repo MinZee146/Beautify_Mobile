@@ -175,13 +175,6 @@ const ProductDetailScreen = () => {
                       {rating} <AntDesign name="star" color="#FFD700" />{" "}
                       <Text style={styles.ratingCount}>({count})</Text>
                     </Text>
-                  </View>
-                ))}
-              </View>
-              <View style={styles.ratingPocessing}>
-                {Object.entries(product.ratingsCount).map(([rating, count]) => (
-                  <View key={rating} style={styles.ratingItem}>
-                    <Text style={styles.ratingText}></Text>
                     <View style={styles.progressBarContainer}>
                       <View
                         style={[
@@ -331,13 +324,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   ratingDistribution: {
-    flex: 2,
+    flex: 7,
     justifyContent: "center",
-  },
-  ratingPocessing: {
-    flex: 4,
-    justifyContent: "center",
-    marginRight: 16,
   },
   reviewHeader: {
     flexDirection: "row",
@@ -381,6 +369,7 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 16,
     marginRight: 8,
+    flex: 3,
   },
   ratingCount: {
     fontSize: 16,
@@ -392,6 +381,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0e0e0",
     borderRadius: 8,
     marginLeft: 10,
+    flex: 7,
   },
   progressBar: {
     height: "100%",
@@ -446,7 +436,7 @@ const ReviewCard = ({
         </View>
         <Text style={{ fontSize: 20, color: "#FAAF00", fontWeight: "bold" }}>
           <AntDesign name="star" size={14} color="#FFD700" />{" "}
-          {rating.toFixed(2)}
+          {rating.toFixed(1)}
         </Text>
       </View>
       <View style={{ flex: 1 }}>
