@@ -1,55 +1,15 @@
 import React from "react";
-import { View } from "react-native";
-import { Text, styled, Image } from "tamagui";
+import { ImageBackground } from "react-native";
+import { Text, styled } from "tamagui";
+import HeroBanner from "../../../assets/images/herobanner.jpg";
+//khs dong nay bi loi
 
-const BannerContainer = styled(View, {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: 20,
-  backgroundColor: "#060606",
-});
-
-const TextContainer = styled(View, {
-  flex: 1,
-});
-
-const TitleText = styled(Text, {
-  fontSize: 24,
-  fontWeight: "700",
-  color: "#FFC0CB",
-  marginBottom: 10,
-  textAlign: "left",
-});
-
-const ImageContainer = styled(View, {
-  flex: 1,
-  alignItems: "flex-end",
-});
-
-const BannerImage = styled(Image, {
-  width: 150,
+const BannerContainer = styled(ImageBackground, {
   height: 150,
-  borderRadius: 20,
 });
 
 const Banner: React.FC = () => {
-  return (
-    <BannerContainer>
-      <TextContainer>
-        <TitleText>
-          "Feel Beautiful,{"\n"}
-          {"\t"} Be Confident."
-        </TitleText>
-      </TextContainer>
-      <ImageContainer>
-        <BannerImage
-          source={require("../../../assets/images/model.jpg")}
-          resizeMode="cover"
-        />
-      </ImageContainer>
-    </BannerContainer>
-  );
+  return <BannerContainer source={HeroBanner} resizeMode="cover" />;
 };
 
 export default Banner;
