@@ -8,6 +8,7 @@ const routes: {
   { name: "Promo", path: "/promo" },
   { name: "Sign In", path: "/components/authPage/signin" },
   { name: "Sign Up", path: "/components/authPage/signup" },
+  { name: "Profile", path: "/profile" },
   { name: "Home", path: "/home" },
   { name: "Product Detail", path: "/components/productPage/productDetail" },
   { name: "Cart", path: "/components/cartPage/cart" },
