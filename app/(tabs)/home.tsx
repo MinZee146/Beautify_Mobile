@@ -101,10 +101,11 @@ const HomeScreen = () => {
       </View>
 
       {/* Product List */}
-      <ScrollView>
+      <ScrollView paddingHorizontal="6">
         <Banner />
-        <Text style={styles.sectionTitle}>Popular</Text>
+        <Text style={styles.sectionTitle}>Popular ----------------------------</Text>
         <FlatList
+          style={{ paddingBottom: 8, paddingLeft: 5, paddingTop: 3, paddingRight: 5 }}
           data={products}
           renderItem={({ item }) => (
             <PopularCard
@@ -121,7 +122,7 @@ const HomeScreen = () => {
           contentContainerStyle={styles.popularList}
         />
 
-        <Text style={styles.sectionTitle}>Products</Text>
+        <Text style={styles.sectionTitle}>Products ---------------------------</Text>
         <View style={styles.productList}>
           {products.map((product, index) => (
             <ProductCard
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 4,
     borderRadius: 20,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#FCFCF7",
     borderWidth: 1.5,
     borderColor: "#116A7B",
   },
@@ -188,7 +189,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     columnGap: 10,
     borderRadius: 10,
-    backgroundColor: "transparent",
   },
 });
 

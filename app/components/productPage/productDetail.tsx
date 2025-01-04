@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 20,
-    color: "#e91e63",
+    color: "#FF6D00",
     fontWeight: "bold",
   },
   tagContainer: {

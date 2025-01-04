@@ -19,13 +19,7 @@ const PopularCard: React.FC<PopularCardProps> = ({
   reviews,
 }) => {
   return (
-    <Card
-      elevate
-      borderRadius={16}
-      width={140}
-      backgroundColor="$colorTransparent"
-      space={8}
-    >
+    <Card elevate elevation={2} borderRadius={16} width={140} space={8}>
       {/* Hình ảnh */}
       <Card.Header padding={0}>
         <Image

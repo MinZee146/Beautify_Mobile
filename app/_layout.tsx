@@ -26,6 +26,12 @@ const tamaguiConfig = createTamagui({
     heading: fonts.playfair,
   },
   defaultFont: "body",
+  themes: {
+    light: {
+      background: "#FCFCF7",
+      black: "#0B0B0B",
+    },
+  },
 });
 
 type Conf = typeof tamaguiConfig;

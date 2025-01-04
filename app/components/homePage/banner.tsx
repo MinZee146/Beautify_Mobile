@@ -6,6 +6,7 @@ import HeroBanner from "../../../assets/images/herobanner.jpg";
 
 const BannerContainer = styled(ImageBackground, {
   height: 150,
+  marginHorizontal: -6,
 });
 
 const Banner: React.FC = () => {
