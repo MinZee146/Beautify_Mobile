@@ -12,10 +12,10 @@ const ProductDetailScreen = () => {
 
   const product = {
     images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300/FF0000",
-      "https://via.placeholder.com/300/00FF00",
-      "https://via.placeholder.com/300/0000FF",
+      require("../../../assets/images/PD1.webp"),
+      require("../../../assets/images/PD2.webp"),
+      require("../../../assets/images/PD3.webp"),
+      require("../../../assets/images/PD4.webp"),
     ],
     name: "Product Name",
     brand: "Brand Name",
@@ -90,11 +90,7 @@ const ProductDetailScreen = () => {
             autoplayTimeout={5}
           >
             {product.images.map((image, index) => (
-              <Image
-                key={index}
-                source={{ uri: image }}
-                style={styles.productImage}
-              />
+              <Image key={index} source={image} style={styles.productImage} />
             ))}
           </Swiper>
         </View>
@@ -218,7 +214,12 @@ const styles = StyleSheet.create({
   },
   imageContainer: { width: "100%", aspectRatio: 1 },
   imageSwiper: { height: "100%" },
-  productImage: { width: "100%", aspectRatio: 1, resizeMode: "cover" },
+  productImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+    backgroundColor: "#fff",
+  },
   scrollContent: {
     padding: 16,
   },
