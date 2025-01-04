@@ -12,10 +12,10 @@ const ProductDetailScreen = () => {
 
   const product = {
     images: [
-      require("../../../assets/images/PD1.webp"),
-      require("../../../assets/images/PD2.webp"),
-      require("../../../assets/images/PD3.webp"),
-      require("../../../assets/images/PD4.webp"),
+      require("../../../assets/images/ProductDetail/PD1.webp"),
+      require("../../../assets/images/ProductDetail/PD2.webp"),
+      require("../../../assets/images/ProductDetail/PD3.webp"),
+      require("../../../assets/images/ProductDetail/PD4.webp"),
     ],
     name: "Product Name",
     brand: "Brand Name",
