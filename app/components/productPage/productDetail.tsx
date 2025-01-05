@@ -192,9 +192,9 @@ const ProductDetailScreen = () => {
             {sampleReviews.map((review, index) => (
               <ReviewCard
                 key={index}
-                userName={review.userName}
-                userEmail={review.userEmail}
-                userImage={review.userImage}
+                name={review.userName}
+                email={review.userEmail}
+                image={review.userImage}
                 rating={review.rating}
                 title={review.title}
                 comment={review.comment}
@@ -396,9 +396,9 @@ const styles = StyleSheet.create({
 export default ProductDetailScreen;
 
 const ReviewCard = ({
-  userName,
-  userEmail,
-  userImage,
+  name,
+  email,
+  image,
   rating,
   title,
   comment,
@@ -422,7 +422,7 @@ const ReviewCard = ({
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image
-            source={userImage}
+            source={image}
             style={{
               width: 50,
               height: 50,
@@ -432,9 +432,9 @@ const ReviewCard = ({
           />
           <View>
             <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 2 }}>
-              {userName}
+              {name}
             </Text>
-            <Text style={{ fontSize: 13, color: "#888" }}>{userEmail}</Text>
+            <Text style={{ fontSize: 13, color: "#888" }}>{email}</Text>
           </View>
         </View>
         <Text style={{ fontSize: 20, color: "#FAAF00", fontWeight: "bold" }}>

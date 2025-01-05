@@ -1,7 +1,7 @@
 export default interface ProductReview {
-  userName: string;
-  userEmail: string;
-  userImage: any;
+  name: string;
+  email: string;
+  image: any;
   rating: number;
   title: string;
   comment: string;
