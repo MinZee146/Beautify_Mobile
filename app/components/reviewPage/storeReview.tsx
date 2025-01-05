@@ -27,6 +27,7 @@ const createComment = (
   rating,
   comment,
   date,
+  profilePicture: undefined,
 });
 
 const CommentScreen = () => {

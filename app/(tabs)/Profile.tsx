@@ -5,13 +5,19 @@ import { Button, Input, XStack, YStack, Image, Text, View } from "tamagui";
 const ProfileScreen = () => {
   return (
     <View backgroundColor="#181840">
+      <XStack
+        padding={12}
+        paddingHorizontal={20}
+        backgroundColor="#0b0b0b"
+        alignItems="center"
+        justifyContent="center"
+        borderBottomWidth={1}
+      >
+        <Text fontWeight="700" fontSize={18} color="#FBFCD4">
+          Personal Information
+        </Text>
+      </XStack>
       <YStack padding={16} space={16}>
-        <XStack justifyContent="center" alignItems="center">
-          <Text fontSize={20} fontWeight="bold" color="#fff">
-            Personal Information
-          </Text>
-        </XStack>
-
         <YStack alignItems="center" marginVertical={20}>
           <Image
             source={require("../../assets/images/AppIcon.jpg")}
