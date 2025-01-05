@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   View,
@@ -5,16 +6,22 @@ import {
   FlatList,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from "react-native";
 
 const OrderListScreen = () => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push("/components/orderPage/orderDetail");
+  };
   // Dữ liệu mẫu về các đơn hàng
   const orders = [
     {
       id: "1",
       date: "2025-01-01",
       total: "$120.00",
-      status: "Delivered",
+      status: "Delivering",
       products: [
         { id: "1", name: "Lipstick", quantity: 2, price: "$25.00" },
         { id: "2", name: "Foundation", quantity: 1, price: "$70.00" },
@@ -24,7 +31,7 @@ const OrderListScreen = () => {
       id: "2",
       date: "2025-01-02",
       total: "$80.00",
-      status: "Pending",
+      status: "Prepairing",
       products: [
         { id: "1", name: "Mascara", quantity: 1, price: "$20.00" },
         { id: "2", name: "Blush", quantity: 2, price: "$30.00" },
@@ -32,14 +39,23 @@ const OrderListScreen = () => {
     },
   ];
 
-  const renderItem = ({ item }: { item: { id: string; date: string; total: string; status: string; products: { id: string; name: string; quantity: number; price: string; }[]; } }) => {
+  const renderItem = ({
+    item,
+  }: {
+    item: {
+      id: string;
+      date: string;
+      total: string;
+      status: string;
+      products: { id: string; name: string; quantity: number; price: string }[];
+    };
+  }) => {
     return (
-      <View style={styles.orderItem}>
+      <TouchableOpacity style={styles.orderItem} onPress={handlePress}>
         <Text style={styles.orderDate}>Order Date: {item.date}</Text>
         <Text style={styles.orderStatus}>Status: {item.status}</Text>
         <Text style={styles.orderTotal}>Total: {item.total}</Text>
 
-        {/* Render danh sách các sản phẩm trong đơn hàng */}
         <FlatList
           data={item.products}
           keyExtractor={(product) => product.id}
@@ -55,7 +71,7 @@ const OrderListScreen = () => {
             </View>
           )}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 

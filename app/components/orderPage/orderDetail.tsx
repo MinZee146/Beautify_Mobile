@@ -27,14 +27,14 @@ const OrderDetail = () => {
           <View style={styles.statusLine}></View>
           {/* Step 2 */}
           <View style={styles.statusStep}>
-            <FontAwesome5 name="truck" size={24} color="green" />
+            <FontAwesome5 name="truck" size={24} color="orange" />
             <Text>Delivering</Text>
           </View>
           {/* Line between */}
           <View style={styles.statusLine}></View>
           {/* Step 3 */}
           <View style={styles.statusStep}>
-            <FontAwesome5 name="check-circle" size={24} color="green" />
+            <FontAwesome5 name="check-circle" size={24} color="grey" />
             <Text>Completed</Text>
           </View>
         </View>
@@ -67,8 +67,8 @@ const OrderDetail = () => {
         <Text>Order Price: $20.00</Text>
         <Text>Shipping Fee: $5.00</Text>
         <Text>Voucher (None): - $0</Text>
-        <Text style={styles.finalPrice}>Final Price: $25.00</Text>
         <Text>Payment Method: Cash on Delivery</Text>
+        <Text style={styles.finalPrice}>Final Price: $25.00</Text>
       </View>
     </ScrollView>
   );
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   statusLine: {
     flex: 1,
     height: 2, // Thickness of the line
-    backgroundColor: "green", // Color of the line
+    backgroundColor: "grey", // Color of the line
     marginHorizontal: 8, // Spacing around the line
   },
   orderItems: {

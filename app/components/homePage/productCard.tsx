@@ -3,12 +3,19 @@ import { Card, Text, Image, Button, XStack, YStack } from "tamagui";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Product from "@/app/enities/product";
+import { useRouter } from "expo-router";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push("/components/productPage/productDetail");
+  };
+
   return (
     <Card
       elevate
@@ -17,6 +24,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       height={120}
       borderRadius={12}
       backgroundColor="#fffff7"
+      onPress={handlePress}
     >
       <XStack height="100%" gap={12} padding={10}>
         {/* Product Image */}

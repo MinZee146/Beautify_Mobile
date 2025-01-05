@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import ProductCard from "../components/homePage/productCard";
 import PopularCard from "../components/homePage/popularCard";
@@ -11,6 +11,8 @@ import { sampleCategories } from "../enities/category";
 
 const HomeScreen = () => {
   const router = useRouter();
+  const [activeIndex, setActiveIndex] = useState(-1);
+
   return (
     <View style={styles.container}>
       {/* Sticky Header */}
@@ -43,13 +45,14 @@ const HomeScreen = () => {
             <TouchableOpacity
               style={[
                 styles.categoryButton,
-                index === 1 && styles.activeCategory,
+                activeIndex === index && styles.activeCategory, // So sánh với activeIndex
               ]}
+              onPress={() => setActiveIndex(index)} // Cập nhật trạng thái
             >
               <Text
                 style={[
                   styles.categoryText,
-                  index === 1 && styles.activeCategoryText,
+                  activeIndex === index && styles.activeCategoryText, // So sánh với activeIndex
                 ]}
               >
                 {item}

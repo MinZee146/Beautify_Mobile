@@ -210,7 +210,7 @@ const ProductDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#faf9f6",
   },
   imageContainer: { width: "100%", aspectRatio: 1 },
   imageSwiper: { height: "100%" },
@@ -222,6 +222,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
+    borderBottomWidth: 2,
+    borderBottomColor: "#E3D7CB",
   },
   productName: {
     fontSize: 26,

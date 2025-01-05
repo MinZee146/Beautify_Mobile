@@ -1,5 +1,6 @@
 import Product from "@/app/enities/product";
 import { AntDesign } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Image } from "react-native";
 import { Card, Text, YStack, XStack } from "tamagui";
@@ -9,6 +10,12 @@ interface PopularCardProps {
 }
 
 const PopularCard = ({ product }: PopularCardProps) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push("/components/productPage/productDetail");
+  };
+
   return (
     <Card
       margin={3}
@@ -18,6 +25,7 @@ const PopularCard = ({ product }: PopularCardProps) => {
       width={140}
       space={8}
       backgroundColor="#fffff7"
+      onPress={handlePress}
     >
       {/* Hình ảnh */}
       <Card.Header padding={0}>

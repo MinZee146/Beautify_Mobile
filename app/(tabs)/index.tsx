@@ -5,7 +5,6 @@ const routes: {
   name: string;
   path: string;
 }[] = [
-  { name: "Promo", path: "/promo" },
   { name: "Sign In", path: "/components/authPage/signin" },
   { name: "Sign Up", path: "/components/authPage/signup" },
   { name: "Profile", path: "/profile" },

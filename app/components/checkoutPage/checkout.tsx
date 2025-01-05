@@ -123,6 +123,7 @@ const CheckoutScreen = () => {
               <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Your Information</Text>
                 <TextInput
+                  placeholderTextColor={"grey"}
                   style={styles.input}
                   placeholder="Full Name"
                   value={userInfo.name}
@@ -131,6 +132,7 @@ const CheckoutScreen = () => {
                   }
                 />
                 <TextInput
+                  placeholderTextColor={"grey"}
                   style={styles.input}
                   placeholder="Address"
                   value={userInfo.address}
@@ -139,6 +141,7 @@ const CheckoutScreen = () => {
                   }
                 />
                 <TextInput
+                  placeholderTextColor={"grey"}
                   style={styles.input}
                   placeholder="Phone Number"
                   value={userInfo.phoneNumber}
@@ -154,7 +157,7 @@ const CheckoutScreen = () => {
                 <Text style={styles.sectionTitle}>Voucher</Text>
                 <TouchableOpacity
                   onPress={() => setIsVoucherModalVisible(true)}
-                  style={styles.cardButton}
+                  style={styles.selectVoucherButton}
                 >
                   {voucher ? (
                     <View style={styles.rowCenter}>
@@ -177,9 +180,9 @@ const CheckoutScreen = () => {
                 <Text style={styles.sectionTitle}>Payment Method</Text>
                 <TouchableOpacity
                   onPress={() => setIsPaymentModalVisible(true)}
-                  style={styles.cardButton}
+                  style={styles.paymentMethodButton}
                 >
-                  <Text style={styles.placeholderText}>{paymentMethod}</Text>
+                  <Text style={styles.voucherText}>{paymentMethod}</Text>
                 </TouchableOpacity>
               </View>
 
@@ -333,15 +336,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
-  cardButton: {
+  selectVoucherButton: {
     borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 12,
-    padding: 16,
-    backgroundColor: "#fff",
+    borderColor: "#FFA500", // Cam đậm
+    borderRadius: 16,
+    padding: 20,
+    backgroundColor: "#FFEECC", // Cam nhạt
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 3,
+  },
+  paymentMethodButton: {
+    borderWidth: 1,
+    borderColor: "#007BFF", // Xanh đậm
+    borderRadius: 16,
+    padding: 20,
+    backgroundColor: "#CCE5FF", // Xanh nhạt
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 3,
   },
   rowCenter: {
     flexDirection: "row",
@@ -355,10 +378,12 @@ const styles = StyleSheet.create({
   voucherText: {
     fontSize: 16,
     color: "#333",
+    fontFamily: "Poppins-Bold"
   },
   placeholderText: {
     fontSize: 16,
     color: "#999",
+    fontFamily: "Poppins-Bold"
   },
   productRow: {
     flexDirection: "row",
