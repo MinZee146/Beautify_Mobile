@@ -11,7 +11,8 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-
+import Entypo from "@expo/vector-icons/Entypo";
+import { MaterialIcons } from "@expo/vector-icons";
 const CheckoutScreen = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -121,41 +122,42 @@ const CheckoutScreen = () => {
 
               {/* User Info */}
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Your Information</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Full Name"
-                  value={userInfo.name}
-                  onChangeText={(text) =>
-                    setUserInfo({ ...userInfo, name: text })
-                  }
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Address"
-                  value={userInfo.address}
-                  onChangeText={(text) =>
-                    setUserInfo({ ...userInfo, address: text })
-                  }
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Phone Number"
-                  value={userInfo.phoneNumber}
-                  keyboardType="phone-pad"
-                  onChangeText={(text) =>
-                    setUserInfo({ ...userInfo, phoneNumber: text })
-                  }
-                />
+                <View style={styles.rowBetween}>
+                  <Text style={styles.sectionTitle}>Pickup Location</Text>
+
+                  <TouchableOpacity
+                    onPress={() => console.log("Change user info")}
+                  >
+                    <Text style={styles.changeButton}>Change</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.userInfoContainer}>
+                  <Entypo
+                    name="location-pin"
+                    size={24}
+                    color="pink"
+                    style={styles.icon}
+                  />
+                  <View style={styles.userInfoText}>
+                    <Text style={styles.userName}>
+                      {userInfo.name || "Naturo Sunnyvale"}
+                    </Text>
+                    <Text style={styles.userAddress}>
+                      {userInfo.address ||
+                        "123 Sunnyvale Road\nGreenfield, QLD 4567"}
+                    </Text>
+                  </View>
+                </View>
               </View>
 
               {/* Voucher */}
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Voucher</Text>
+                <Text style={styles.sectionTitle}>Redeem Your Reward</Text>
                 <TouchableOpacity
                   onPress={() => setIsVoucherModalVisible(true)}
                   style={styles.cardButton}
                 >
+                  <MaterialIcons name="discount" size={24} color="#CF2C4A" />
                   {voucher ? (
                     <View style={styles.rowCenter}>
                       <Image
@@ -177,9 +179,24 @@ const CheckoutScreen = () => {
                 <Text style={styles.sectionTitle}>Payment Method</Text>
                 <TouchableOpacity
                   onPress={() => setIsPaymentModalVisible(true)}
-                  style={styles.cardButton}
+                  style={styles.paymentMethodButton}
                 >
-                  <Text style={styles.placeholderText}>{paymentMethod}</Text>
+                  <View style={styles.rowLeft}>
+                    <Entypo
+                      name="paypal"
+                      size={24}
+                      color="blue"
+                      style={styles.icon}
+                    />
+                    <Text style={styles.paymentMethodText}>
+                      ****-****-****-1234
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => console.log("Change payment method")}
+                  >
+                    <Text style={styles.changeText}>Change</Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
               </View>
 
@@ -334,14 +351,16 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   cardButton: {
-    borderWidth: 1,
-    borderColor: "#ddd",
+    borderWidth: 2,
+    borderColor: "#EDB4BE",
+    borderStyle: "dashed",
     borderRadius: 12,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#FDF5F7",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    gap: 20,
   },
   rowCenter: {
     flexDirection: "row",
@@ -354,11 +373,11 @@ const styles = StyleSheet.create({
   },
   voucherText: {
     fontSize: 16,
-    color: "#333",
+    color: "#001303",
   },
   placeholderText: {
     fontSize: 16,
-    color: "#999",
+    color: "#001303",
   },
   productRow: {
     flexDirection: "row",
@@ -410,7 +429,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   placeOrderButton: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#FF007F",
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 12,
@@ -468,6 +487,76 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 6,
+  },
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  changeButton: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FF007F",
+  },
+  userInfoContainer: {
+    flexDirection: "row",
+    alignItems: "flex-start", // Căn dòng trên cùng theo biểu tượng
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3, // Hiệu ứng nổi trên Android
+  },
+  userInfoText: {
+    flex: 1,
+  },
+  icon: {
+    marginRight: 12,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 4,
+  },
+  userAddress: {
+    fontSize: 14,
+    color: "#555",
+    marginBottom: 4,
+  },
+  userPhone: {
+    fontSize: 14,
+    color: "#555",
+  },
+  paymentMethodButton: {
+    flexDirection: "row", // Sắp xếp các phần tử theo hàng
+    justifyContent: "space-between", // Đẩy nội dung 2 đầu
+    alignItems: "center", // Căn giữa theo chiều dọc
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 12,
+    padding: 16,
+    backgroundColor: "#fff",
+  },
+
+  rowLeft: {
+    flexDirection: "row",
+    alignItems: "center", // Căn giữa icon và text
+  },
+  paymentMethodText: {
+    fontSize: 18,
+    color: "#333",
+  },
+  changeText: {
+    fontSize: 16,
+    color: "#FF007F", // Màu hồng cho nút Change
+    fontWeight: "bold",
   },
 });
 
