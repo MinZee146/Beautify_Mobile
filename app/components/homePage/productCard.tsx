@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Text, Image, Button, XStack, YStack } from "tamagui";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Product from "@/app/enities/Product";
+import Product from "@/app/enities/product";
 
 interface ProductCardProps {
   product: Product;

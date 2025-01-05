@@ -6,12 +6,11 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image, View, Text, ScrollView } from "tamagui";
 import Banner from "../components/homePage/banner";
 import { useRouter } from "expo-router";
-import { sampleProducts } from "../enities/Product";
+import { sampleProducts } from "../enities/product";
 import { sampleCategories } from "../enities/category";
 
 const HomeScreen = () => {
   const router = useRouter();
-
   return (
     <View style={styles.container}>
       {/* Sticky Header */}

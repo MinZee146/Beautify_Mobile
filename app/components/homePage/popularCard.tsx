@@ -1,4 +1,4 @@
-import Product from "@/app/enities/Product";
+import Product from "@/app/enities/product";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Image } from "react-native";
@@ -41,7 +41,7 @@ const PopularCard = ({ product }: PopularCardProps) => {
           numberOfLines={2}
           ellipsizeMode="tail"
         >
-          {name}
+          {product.name}
         </Text>
 
         {/* Giá và Đánh giá */}
