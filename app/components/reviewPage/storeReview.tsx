@@ -18,14 +18,15 @@ const createComment = (
   email: string,
   rating: number,
   comment: string,
-  title: string
+  title: string,
+  image: any
 ): StoreReview => ({
   name,
   email,
   rating,
   comment,
   title,
-  image: undefined,
+  image,
 });
 
 const CommentScreen = () => {
@@ -50,7 +51,8 @@ const CommentScreen = () => {
       newEmail,
       parseFloat(totalRating),
       newComment,
-      newTitle
+      newTitle,
+      require("../../../assets/images/model.jpg")
     );
 
     setComments((prevComments) => [...prevComments, newCommentObj]);
