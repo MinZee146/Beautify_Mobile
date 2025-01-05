@@ -155,7 +155,7 @@ const CheckoutScreen = () => {
                 <Text style={styles.sectionTitle}>Redeem Your Reward</Text>
                 <TouchableOpacity
                   onPress={() => setIsVoucherModalVisible(true)}
-                  style={styles.selectVoucherButton}
+                  style={styles.cardButton}
                 >
                   <MaterialIcons name="discount" size={24} color="#CF2C4A" />
                   {voucher ? (
@@ -350,35 +350,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
-  selectVoucherButton: {
-    borderWidth: 1,
-    borderColor: "#FFA500", // Cam đậm
-    borderRadius: 16,
-    padding: 20,
-    backgroundColor: "#FFEECC", // Cam nhạt
+  cardButton: {
+    borderWidth: 2,
+    borderColor: "#EDB4BE",
+    borderStyle: "dashed",
+    borderRadius: 12,
+    padding: 16,
+    backgroundColor: "#FDF5F7",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 3,
-  },
-  paymentMethodButton: {
-    borderWidth: 1,
-    borderColor: "#007BFF", // Xanh đậm
-    borderRadius: 16,
-    padding: 20,
-    backgroundColor: "#CCE5FF", // Xanh nhạt
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 3,
+    justifyContent: "flex-start",
+    gap: 20,
   },
   rowCenter: {
     flexDirection: "row",
@@ -391,13 +373,11 @@ const styles = StyleSheet.create({
   },
   voucherText: {
     fontSize: 16,
-    color: "#333",
-    fontFamily: "Poppins-Bold"
+    color: "#001303",
   },
   placeholderText: {
     fontSize: 16,
-    color: "#999",
-    fontFamily: "Poppins-Bold"
+    color: "#001303",
   },
   productRow: {
     flexDirection: "row",
