@@ -14,8 +14,6 @@ const routes: {
   { name: "Checkout", path: "/components/checkoutPage/checkout" },
   { name: "Order", path: "/components/orderPage/order" },
   { name: "Order Detail", path: "/components/orderPage/orderDetail" },
-  { name: "Service", path: "/components/servicePage/service" },
-  { name: "Service Detail", path: "/components/servicePage/serviceDetail" },
   { name: "Store Review", path: "/components/reviewPage/storeReview" },
 ];
 
