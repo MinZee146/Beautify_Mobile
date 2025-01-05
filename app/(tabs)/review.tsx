@@ -51,8 +51,7 @@ const CommentScreen = () => {
       newEmail,
       parseFloat(totalRating),
       newComment,
-      newTitle,
-      require("../../../assets/images/model.jpg")
+      newTitle
     );
 
     setComments((prevComments) => [...prevComments, newCommentObj]);

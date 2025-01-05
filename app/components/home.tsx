@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import ProductCard from "../components/homePage/productCard";
-import PopularCard from "../components/homePage/popularCard";
+import ProductCard from "./homePage/productCard";
+import PopularCard from "./homePage/popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image, View, Text, ScrollView } from "tamagui";
-import Banner from "../components/homePage/banner";
+import Banner from "./homePage/banner";
 import { useRouter } from "expo-router";
 import { sampleProducts } from "../enities/product";
 import { sampleCategories } from "../enities/category";

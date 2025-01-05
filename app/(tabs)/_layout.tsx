@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { YStack } from "tamagui";
 
@@ -42,25 +42,12 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="home"
+          name="review"
           options={{
-            title: "Home",
+            title: "Reviews",
             tabBarIcon: ({ color, focused }) => (
-              <Ionicons
-                name={focused ? "home-sharp" : "home-outline"}
-                color={color}
-                size={28}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="promo"
-          options={{
-            title: "Home",
-            tabBarIcon: ({ color, focused }) => (
-              <Ionicons
-                name={focused ? "home-sharp" : "home-outline"}
+              <AntDesign
+                name={focused ? "star" : "staro"}
                 color={color}
                 size={28}
               />
@@ -72,8 +59,8 @@ export default function TabLayout() {
           options={{
             title: "Profile",
             tabBarIcon: ({ color, focused }) => (
-              <Ionicons
-                name={focused ? "person" : "person-outline"}
+              <AntDesign
+                name={focused ? "infocirlce" : "infocirlceo"}
                 color={color}
                 size={28}
               />
