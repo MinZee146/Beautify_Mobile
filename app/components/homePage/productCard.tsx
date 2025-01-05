@@ -21,7 +21,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <XStack height="100%" gap={12} padding={10}>
         {/* Product Image */}
         <Image
-          source={{ uri: product.image }}
+          source={product.image}
           width={100}
           height="100%"
           borderRadius={8}

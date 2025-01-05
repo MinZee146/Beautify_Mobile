@@ -22,7 +22,7 @@ const PopularCard = ({ product }: PopularCardProps) => {
       {/* Hình ảnh */}
       <Card.Header padding={0}>
         <Image
-          source={{ uri: product.image }}
+          source={product.image}
           style={{
             width: "100%",
             height: 140,
