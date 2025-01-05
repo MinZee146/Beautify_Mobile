@@ -32,7 +32,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {/* Product Name */}
           <YStack gap={6}>
             <Text fontSize={14} fontWeight="700" numberOfLines={2}>
-              {name}
+              {product.name}
             </Text>
 
             {/* Rating and Reviews */}
