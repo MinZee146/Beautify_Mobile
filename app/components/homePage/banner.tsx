@@ -1,8 +1,6 @@
 import React from "react";
 import { ImageBackground } from "react-native";
-import { Text, styled } from "tamagui";
-import HeroBanner from "../../../assets/images/herobanner.jpg";
-//khs dong nay bi loi
+import { styled } from "tamagui";
 
 const BannerContainer = styled(ImageBackground, {
   height: 150,
@@ -10,7 +8,8 @@ const BannerContainer = styled(ImageBackground, {
 });
 
 const Banner: React.FC = () => {
-  return <BannerContainer source={HeroBanner} resizeMode="cover" />;
+  const banner = { image: require("../../../assets/images/herobanner.jpg") };
+  return <BannerContainer source={banner.image} resizeMode="cover" />;
 };
 
 export default Banner;
