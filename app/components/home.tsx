@@ -40,6 +40,8 @@ const HomeScreen = () => {
       </XStack>
       <View style={styles.stickyHeader}>
         <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           data={sampleCategories}
           renderItem={({ item, index }) => (
             <TouchableOpacity
@@ -82,6 +84,7 @@ const HomeScreen = () => {
           renderItem={({ item }) => <PopularCard product={item} />}
           keyExtractor={(_, index) => index.toString()}
           horizontal
+          showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.popularList}
         />

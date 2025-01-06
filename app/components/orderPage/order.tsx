@@ -100,6 +100,8 @@ const OrderListScreen = () => {
         <Text style={styles.orderTotal}>Total: {item.total}</Text>
 
         <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           data={item.products}
           keyExtractor={(product) => product.id}
           renderItem={({ item: product }) => (
@@ -139,6 +141,8 @@ const OrderListScreen = () => {
           data={orders}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </View>

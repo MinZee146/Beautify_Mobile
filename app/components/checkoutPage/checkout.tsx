@@ -134,6 +134,8 @@ const CheckoutScreen = () => {
           </Text>
         </XStack>
         <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={
             <View>
@@ -272,6 +274,8 @@ const CheckoutScreen = () => {
               <FlatList
                 data={vouchers}
                 keyExtractor={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     onPress={() => applyVoucher(item)}
@@ -305,6 +309,8 @@ const CheckoutScreen = () => {
               <Text style={styles.modalTitle}>Select Payment Method</Text>
               <FlatList
                 data={paymentMethods}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                   <TouchableOpacity
