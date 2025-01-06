@@ -146,193 +146,207 @@ const CommentScreen = () => {
           Shop Reviews
         </Text>
       </XStack>
-      <ScrollView>
-        <View style={{ padding: 16 }}>
-          {/* Rating Summary and Criteria */}
-          <View style={styles.ratingContainer}>
-            <View style={styles.overallRatingSection}>
-              <Text style={styles.overallRatingText}>
-                {(
-                  (ratingsSummary.productQuality +
-                    ratingsSummary.serviceQuality +
-                    ratingsSummary.deliveryQuality) /
-                  3
-                ).toFixed(1)}
-              </Text>
-              <Rating
-                startingValue={
-                  (ratingsSummary.productQuality +
-                    ratingsSummary.serviceQuality +
-                    ratingsSummary.deliveryQuality) /
-                  3
-                }
-                readonly
-                imageSize={20}
-                style={{
-                  marginVertical: 5,
-                }}
-              />
-
-              <Text style={styles.totalReviews}>
-                {ratingsSummary.totalReviews} Reviews
-              </Text>
-            </View>
-
-            <View style={styles.criteriaRatingSection}>
-              <View style={styles.criteriaRow}>
-                <Text style={styles.criteriaLabel}>Product Quality</Text>
-              </View>
-              <View style={styles.progressRow}>
-                <View style={styles.progressBar}>
-                  <View
-                    style={[
-                      styles.progressFill,
-                      {
-                        width: `${(ratingsSummary.productQuality / 5) * 100}%`,
-                        backgroundColor: "#4CAF50",
-                      },
-                    ]}
+      <View padding={16}>
+        <FlatList
+          data={comments}
+          renderItem={renderComment}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          ListHeaderComponent={() => (
+            <View>
+              {/* Rating Summary and Criteria */}
+              <View style={styles.ratingContainer}>
+                <View style={styles.overallRatingSection}>
+                  <Text style={styles.overallRatingText}>
+                    {(
+                      (ratingsSummary.productQuality +
+                        ratingsSummary.serviceQuality +
+                        ratingsSummary.deliveryQuality) /
+                      3
+                    ).toFixed(1)}
+                  </Text>
+                  <Rating
+                    startingValue={
+                      (ratingsSummary.productQuality +
+                        ratingsSummary.serviceQuality +
+                        ratingsSummary.deliveryQuality) /
+                      3
+                    }
+                    readonly
+                    imageSize={20}
+                    style={{
+                      marginVertical: 5,
+                    }}
                   />
+
+                  <Text style={styles.totalReviews}>
+                    {ratingsSummary.totalReviews} Reviews
+                  </Text>
                 </View>
-                <Text style={styles.criteriaValue}>
-                  {ratingsSummary.productQuality}/5
-                </Text>
-              </View>
 
-              <View style={styles.criteriaRow}>
-                <Text style={styles.criteriaLabel}>Service Quality</Text>
-              </View>
-              <View style={styles.progressRow}>
-                <View style={styles.progressBar}>
-                  <View
-                    style={[
-                      styles.progressFill,
-                      {
-                        width: `${(ratingsSummary.serviceQuality / 5) * 100}%`,
-                        backgroundColor: "#4CAF50",
-                      },
-                    ]}
-                  />
+                <View style={styles.criteriaRatingSection}>
+                  <View style={styles.criteriaRow}>
+                    <Text style={styles.criteriaLabel}>Product Quality</Text>
+                  </View>
+                  <View style={styles.progressRow}>
+                    <View style={styles.progressBar}>
+                      <View
+                        style={[
+                          styles.progressFill,
+                          {
+                            width: `${
+                              (ratingsSummary.productQuality / 5) * 100
+                            }%`,
+                            backgroundColor: "#4CAF50",
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text style={styles.criteriaValue}>
+                      {ratingsSummary.productQuality}/5
+                    </Text>
+                  </View>
+
+                  <View style={styles.criteriaRow}>
+                    <Text style={styles.criteriaLabel}>Service Quality</Text>
+                  </View>
+                  <View style={styles.progressRow}>
+                    <View style={styles.progressBar}>
+                      <View
+                        style={[
+                          styles.progressFill,
+                          {
+                            width: `${
+                              (ratingsSummary.serviceQuality / 5) * 100
+                            }%`,
+                            backgroundColor: "#4CAF50",
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text style={styles.criteriaValue}>
+                      {ratingsSummary.serviceQuality}/5
+                    </Text>
+                  </View>
+
+                  <View style={styles.criteriaRow}>
+                    <Text style={styles.criteriaLabel}>Delivery Quality</Text>
+                  </View>
+                  <View style={styles.progressRow}>
+                    <View style={styles.progressBar}>
+                      <View
+                        style={[
+                          styles.progressFill,
+                          {
+                            width: `${
+                              (ratingsSummary.deliveryQuality / 5) * 100
+                            }%`,
+                            backgroundColor: "#4CAF50",
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text style={styles.criteriaValue}>
+                      {ratingsSummary.deliveryQuality}/5
+                    </Text>
+                  </View>
                 </View>
-                <Text style={styles.criteriaValue}>
-                  {ratingsSummary.serviceQuality}/5
-                </Text>
               </View>
 
-              <View style={styles.criteriaRow}>
-                <Text style={styles.criteriaLabel}>Delivery Quality</Text>
-              </View>
-              <View style={styles.progressRow}>
-                <View style={styles.progressBar}>
-                  <View
-                    style={[
-                      styles.progressFill,
-                      {
-                        width: `${(ratingsSummary.deliveryQuality / 5) * 100}%`,
-                        backgroundColor: "#4CAF50",
-                      },
-                    ]}
-                  />
-                </View>
-                <Text style={styles.criteriaValue}>
-                  {ratingsSummary.deliveryQuality}/5
-                </Text>
-              </View>
-            </View>
-          </View>
+              {/* Comment List */}
 
-          {/* Comment List */}
-
-          <XStack
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-            marginBottom={12}
-          >
-            <Text fontSize={24} fontWeight={600}>
-              Reviews ({comments.length})
-            </Text>
-            {/* Add Comment Button */}
-            <TouchableOpacity
-              style={styles.addCommentButton}
-              onPress={() => setShowAddComment(!showAddComment)}
-            >
-              <Text style={styles.addCommentButtonText}>
-                {showAddComment ? "HIDE" : "ADD REVIEW"}
-              </Text>
-            </TouchableOpacity>
-          </XStack>
-          <FlatList data={comments} renderItem={renderComment} />
-
-          {/* Add Comment Form */}
-          {showAddComment && (
-            <View style={styles.addCommentForm}>
-              {/* Rating Section */}
-              <View style={styles.ratingCriteria}>
-                <Text style={styles.criteriaLabel}>Đánh giá sản phẩm</Text>
-                <Rating
-                  startingValue={productRating}
-                  onFinishRating={setProductRating}
-                  imageSize={20}
-                  style={styles.ratingStars}
-                />
-              </View>
-              <View style={styles.ratingCriteria}>
-                <Text style={styles.criteriaLabel}>Đánh giá dịch vụ</Text>
-                <Rating
-                  startingValue={serviceRating}
-                  onFinishRating={setServiceRating}
-                  imageSize={20}
-                  style={styles.ratingStars}
-                />
-              </View>
-              <View style={styles.ratingCriteria}>
-                <Text style={styles.criteriaLabel}>Đánh giá giao hàng</Text>
-                <Rating
-                  startingValue={deliveryRating}
-                  onFinishRating={setDeliveryRating}
-                  imageSize={20}
-                  style={styles.ratingStars}
-                />
-              </View>
-
-              {/* User Information Section */}
-              <TextInput
-                style={styles.inputField}
-                placeholder="Name"
-                value={newName}
-                onChangeText={setNewName}
-              />
-              <TextInput
-                style={styles.inputField}
-                placeholder="Email"
-                value={newEmail}
-                onChangeText={setNewEmail}
-              />
-              <TextInput
-                style={styles.inputField}
-                placeholder="Title"
-                value={newTitle}
-                onChangeText={setNewTitle}
-              />
-              <TextInput
-                style={styles.inputField}
-                placeholder="Comment"
-                value={newComment}
-                onChangeText={setNewComment}
-              />
-
-              {/* Submit Button */}
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={addNewComment}
+              <XStack
+                flexDirection="row"
+                justifyContent="space-between"
+                alignItems="center"
+                marginBottom={12}
               >
-                <Text style={styles.submitButtonText}>Gửi Bình Luận</Text>
-              </TouchableOpacity>
+                <Text fontSize={24} fontWeight="bold">
+                  Reviews ({comments.length})
+                </Text>
+                {/* Add Comment Button */}
+                <TouchableOpacity
+                  style={styles.addCommentButton}
+                  onPress={() => setShowAddComment(!showAddComment)}
+                >
+                  <Text style={styles.addCommentButtonText}>
+                    {showAddComment ? "HIDE" : "ADD REVIEW"}
+                  </Text>
+                </TouchableOpacity>
+              </XStack>
+
+              {/* Add Comment Form */}
+              {showAddComment && (
+                <View style={styles.addCommentForm}>
+                  {/* Rating Section */}
+                  <View style={styles.ratingCriteria}>
+                    <Text style={styles.criteriaLabel}>Đánh giá sản phẩm</Text>
+                    <Rating
+                      startingValue={productRating}
+                      onFinishRating={setProductRating}
+                      imageSize={20}
+                      style={styles.ratingStars}
+                    />
+                  </View>
+                  <View style={styles.ratingCriteria}>
+                    <Text style={styles.criteriaLabel}>Đánh giá dịch vụ</Text>
+                    <Rating
+                      startingValue={serviceRating}
+                      onFinishRating={setServiceRating}
+                      imageSize={20}
+                      style={styles.ratingStars}
+                    />
+                  </View>
+                  <View style={styles.ratingCriteria}>
+                    <Text style={styles.criteriaLabel}>Đánh giá giao hàng</Text>
+                    <Rating
+                      startingValue={deliveryRating}
+                      onFinishRating={setDeliveryRating}
+                      imageSize={20}
+                      style={styles.ratingStars}
+                    />
+                  </View>
+
+                  {/* User Information Section */}
+                  <TextInput
+                    style={styles.inputField}
+                    placeholder="Name"
+                    value={newName}
+                    onChangeText={setNewName}
+                  />
+                  <TextInput
+                    style={styles.inputField}
+                    placeholder="Email"
+                    value={newEmail}
+                    onChangeText={setNewEmail}
+                  />
+                  <TextInput
+                    style={styles.inputField}
+                    placeholder="Title"
+                    value={newTitle}
+                    onChangeText={setNewTitle}
+                  />
+                  <TextInput
+                    style={styles.inputField}
+                    placeholder="Comment"
+                    value={newComment}
+                    onChangeText={setNewComment}
+                  />
+
+                  {/* Submit Button */}
+                  <TouchableOpacity
+                    style={styles.submitButton}
+                    onPress={addNewComment}
+                  >
+                    <Text style={styles.submitButtonText}>Gửi Bình Luận</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           )}
-        </View>
-      </ScrollView>
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
     </View>
   );
 };
