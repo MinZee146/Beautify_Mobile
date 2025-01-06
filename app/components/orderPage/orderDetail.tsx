@@ -50,34 +50,44 @@ const OrderDetail = () => {
             {/* Step 1 */}
             <View style={styles.statusStep}>
               <FontAwesome5 name="hourglass-half" size={24} color="#66BB6A" />
-              <Text
-                style={styles.statusText}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                Preparing
-              </Text>
             </View>
             <View style={styles.statusLine}></View>
             {/* Step 2 */}
             <View style={styles.statusStep}>
               <FontAwesome5 name="truck" size={24} color="#FFA726" />
-              <Text
-                style={styles.statusText}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                Delivering
-              </Text>
             </View>
             <View style={styles.statusLine}></View>
             {/* Step 3 */}
             <View style={styles.statusStep}>
               <FontAwesome5 name="check-circle" size={24} color="#BDBDBD" />
-              <Text style={styles.statusText} numberOfLines={1}>
-                Completed
-              </Text>
             </View>
+          </View>
+          <View
+            flexDirection="row"
+            justifyContent="space-between"
+            marginTop={8}
+          >
+            <Text
+              style={styles.statusText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Preparing
+            </Text>
+            <Text
+              style={styles.statusText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Delivering
+            </Text>
+            <Text
+              style={styles.statusText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Completed
+            </Text>
           </View>
         </View>
 
@@ -187,7 +197,6 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 12,
-    marginTop: 4,
   },
   orderItems: {
     backgroundColor: "#FFFFFF",
