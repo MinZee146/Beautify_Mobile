@@ -8,7 +8,6 @@ import ProductReview, { sampleReviews } from "@/app/enities/productReview";
 
 const ProductDetailScreen = () => {
   const [showMore, setShowMore] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
   const product = {
     images: [

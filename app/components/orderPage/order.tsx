@@ -1,13 +1,8 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, View, Text, XStack } from "tamagui";
 
 const OrderListScreen = () => {
   const router = useRouter();
@@ -15,26 +10,57 @@ const OrderListScreen = () => {
   const handlePress = () => {
     router.push("/components/orderPage/orderDetail");
   };
-  // Dữ liệu mẫu về các đơn hàng
+
   const orders = [
     {
       id: "1",
       date: "2025-01-01",
-      total: "$120.00",
+      total: "$109.97",
       status: "Delivering",
       products: [
-        { id: "1", name: "Lipstick", quantity: 2, price: "$25.00" },
-        { id: "2", name: "Foundation", quantity: 1, price: "$70.00" },
+        {
+          id: "1",
+          name: "Promio Body Lotion",
+          price: "$29.99",
+          quantity: 2,
+          image: require("../../../assets/images/Product/P1.webp"),
+        },
+        {
+          id: "2",
+          name: "Natural Organ Oil",
+          price: "$49.99",
+          quantity: 1,
+          image: require("../../../assets/images/Product/P2.webp"),
+        },
       ],
     },
     {
       id: "2",
       date: "2025-01-02",
-      total: "$80.00",
-      status: "Prepairing",
+      total: "$144.96",
+      status: "Preparing",
       products: [
-        { id: "1", name: "Mascara", quantity: 1, price: "$20.00" },
-        { id: "2", name: "Blush", quantity: 2, price: "$30.00" },
+        {
+          id: "1",
+          name: "Skin Oil Serum",
+          price: "$39.99",
+          quantity: 3,
+          image: require("../../../assets/images/Product/P3.webp"),
+        },
+        {
+          id: "2",
+          name: "Face Cream",
+          price: "$19.99",
+          quantity: 2,
+          image: require("../../../assets/images/Product/P4.webp"),
+        },
+        {
+          id: "3",
+          name: "Moisturizing Lotion",
+          price: "$24.99",
+          quantity: 1,
+          image: require("../../../assets/images/Product/P5.webp"),
+        },
       ],
     },
   ];
@@ -47,27 +73,47 @@ const OrderListScreen = () => {
       date: string;
       total: string;
       status: string;
-      products: { id: string; name: string; quantity: number; price: string }[];
+      products: {
+        id: string;
+        name: string;
+        price: string;
+        quantity: number;
+        image: any;
+      }[];
     };
   }) => {
     return (
       <TouchableOpacity style={styles.orderItem} onPress={handlePress}>
-        <Text style={styles.orderDate}>Order Date: {item.date}</Text>
-        <Text style={styles.orderStatus}>Status: {item.status}</Text>
+        <XStack alignItems="center" justifyContent="space-between">
+          <Text style={styles.orderDate}>Date: {item.date}</Text>
+          <Text
+            style={[
+              styles.orderStatus,
+              item.status === "Delivering"
+                ? styles.statusDelivering
+                : styles.statusPreparing,
+            ]}
+          >
+            {item.status}
+          </Text>
+        </XStack>
         <Text style={styles.orderTotal}>Total: {item.total}</Text>
 
         <FlatList
           data={item.products}
           keyExtractor={(product) => product.id}
           renderItem={({ item: product }) => (
-            <View style={styles.productRow}>
-              <Image
-                source={{ uri: "https://via.placeholder.com/50" }}
-                style={styles.productImage}
-              />
-              <Text style={styles.productName}>{product.name}</Text>
-              <Text style={styles.productQuantity}>x{product.quantity}</Text>
-              <Text style={styles.productPrice}>{product.price}</Text>
+            <View paddingVertical={4}>
+              <View style={styles.productRow}>
+                <Image source={product.image} style={styles.productImage} />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.productName}>{product.name}</Text>
+                  <Text style={styles.productQuantity}>
+                    Qty: {product.quantity}
+                  </Text>
+                </View>
+                <Text style={styles.productPrice}>{product.price}</Text>
+              </View>
             </View>
           )}
         />
@@ -76,70 +122,105 @@ const OrderListScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={orders}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+    <View style={{ flex: 1, backgroundColor: "#F5F6F8" }}>
+      <XStack style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Orders</Text>
+        <TouchableOpacity
+          onPress={() => router.push("/components/cartPage/cart")}
+        >
+          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+      </XStack>
+      <View style={styles.screenContainer}>
+        <FlatList
+          data={orders}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  screenContainer: {
     padding: 16,
   },
+  header: {
+    padding: 12,
+    paddingHorizontal: 20,
+    backgroundColor: "#0b0b0b",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#ddd",
+  },
+  headerTitle: {
+    fontWeight: "700",
+    fontSize: 18,
+    color: "#FBFCD4",
+  },
   orderItem: {
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#ffffff",
     padding: 16,
-    marginBottom: 10,
-    borderRadius: 8,
+    marginVertical: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
     shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
   },
   orderDate: {
     fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 5,
   },
   orderStatus: {
     fontSize: 14,
-    marginBottom: 5,
-    color: "#FF6347", // Red for status
+    fontWeight: "600",
+  },
+  statusDelivering: {
+    color: "#32CD32", // Green for delivering
+  },
+  statusPreparing: {
+    color: "#FF8C00", // Orange for preparing
   },
   orderTotal: {
     fontSize: 16,
-    marginBottom: 10,
+    marginBottom: 16,
     fontWeight: "bold",
+    color: "#333",
   },
   productRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderColor: "#f0f0f0",
   },
   productImage: {
     width: 40,
     height: 40,
-    borderRadius: 5,
-    marginRight: 12,
+    borderRadius: 8,
+    marginRight: 10,
   },
   productName: {
     fontSize: 14,
-    flex: 1,
+    color: "#555",
   },
   productQuantity: {
-    fontSize: 14,
-    marginRight: 10,
+    fontSize: 12,
+    color: "#888",
   },
   productPrice: {
     fontSize: 14,
     fontWeight: "bold",
+    color: "#111",
   },
 });
 
