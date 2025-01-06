@@ -11,7 +11,7 @@ import {
   ScrollView,
 } from "tamagui";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useRouter } from "expo-router";
+import { router, useRouter } from "expo-router";
 import OrderItem, { sampleCartItems } from "@/app/enities/cartItem";
 
 const CartItem = ({
@@ -116,7 +116,11 @@ const CartSummary: React.FC<CartSummaryProps> = ({ total }) => {
         <Text style={styles.totalText}>Grand total</Text>
         <Text style={styles.totalText}>${total.toFixed(2)}</Text>
       </XStack>
-      <TouchableOpacity activeOpacity={0.8} style={styles.checkoutButton}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.checkoutButton}
+        onPress={() => router.push("/components/checkoutPage/checkout")}
+      >
         <Text style={styles.checkoutText}>Checkout now</Text>
       </TouchableOpacity>
     </YStack>
