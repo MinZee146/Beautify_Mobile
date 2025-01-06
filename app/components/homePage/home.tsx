@@ -34,7 +34,7 @@ const HomeScreen = () => {
           <TouchableOpacity
             onPress={() => router.push("/components/cartPage/cart")}
           >
-           <Ionicons name="cart-outline" size={24} color="#FBFCD4" />
+            <Ionicons name="cart-outline" size={24} color="#FBFCD4" />
           </TouchableOpacity>
         </XStack>
       </XStack>
@@ -68,34 +68,32 @@ const HomeScreen = () => {
       </View>
 
       {/* Product List */}
-      <ScrollView paddingHorizontal="6">
+      <ScrollView>
         <Banner />
-        <Text style={styles.sectionTitle}>
-          Popular ----------------------------
-        </Text>
-        <FlatList
-          style={{
-            paddingBottom: 8,
-            paddingLeft: 5,
-            paddingTop: 3,
-            paddingRight: 5,
-          }}
-          data={sampleProducts}
-          renderItem={({ item }) => <PopularCard product={item} />}
-          keyExtractor={(_, index) => index.toString()}
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.popularList}
-        />
+        <View paddingHorizontal={16}>
+          <Text style={styles.sectionTitle}>Popular</Text>
+          <FlatList
+            style={{
+              paddingBottom: 8,
+              paddingLeft: 5,
+              paddingTop: 3,
+              paddingRight: 5,
+            }}
+            data={sampleProducts}
+            renderItem={({ item }) => <PopularCard product={item} />}
+            keyExtractor={(_, index) => index.toString()}
+            horizontal
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.popularList}
+          />
 
-        <Text style={styles.sectionTitle}>
-          Products ---------------------------
-        </Text>
-        <View style={styles.productList}>
-          {sampleProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
+          <Text style={styles.sectionTitle}>Products</Text>
+          <View style={styles.productList}>
+            {sampleProducts.map((product, index) => (
+              <ProductCard key={index} product={product} />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -106,9 +104,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#FCFCF7" },
   stickyHeader: {
     backgroundColor: "#E3D7CB",
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#FCFCF7",
+    paddingVertical: 12,
     zIndex: 1000,
   },
   categories: {
@@ -117,8 +113,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   categoryButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 16,
     marginHorizontal: 4,
     borderRadius: 20,
     backgroundColor: "#FCFCF7",

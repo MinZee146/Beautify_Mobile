@@ -16,14 +16,14 @@ const ProductDetailScreen = () => {
       require("../../../assets/images/ProductDetail/PD3.webp"),
       require("../../../assets/images/ProductDetail/PD4.webp"),
     ],
-    name: "Product Name",
-    brand: "Brand Name",
-    category: "Category Name",
+    name: "Advanced Radiance Boosting Face Serum",
+    brand: "Lancôme",
+    category: "Serum",
     price: "$99.99",
     rating: 4.5,
     reviews: 120,
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Powered by bifidus prebiotic and vitamin CG—a water-soluble, stable vitamin C derivative known to be gentle on skin and not as prone to degradation when exposed to air, heat, or light—this serum supports a strong barrier by locking in hydration and defending against external aggressors, including pollution and dry weather. It also tightens the look of skin and visibly improves fine lines for healthy-, radiant-looking skin in just seven days.",
     ratingsCount: {
       5: 50,
       4: 30,
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E3D7CB",
   },
   productName: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: "bold",
     flex: 1,
   },
