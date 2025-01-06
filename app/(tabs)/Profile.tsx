@@ -1,8 +1,10 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Input, XStack, YStack, Image, Text, View } from "tamagui";
 
 const ProfileScreen = () => {
+  const router = useRouter();
   return (
     <View backgroundColor="#181840">
       <XStack
@@ -71,7 +73,11 @@ const ProfileScreen = () => {
           <TouchableOpacity activeOpacity={0.8} style={styles.authButton}>
             <Text style={styles.authText}>Change Password</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} style={styles.authButton}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.authButton}
+            onPress={() => router.push("/components/authPage/signin")}
+          >
             <Text style={styles.authText}>Sign out</Text>
           </TouchableOpacity>
         </XStack>

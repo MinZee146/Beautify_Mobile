@@ -6,13 +6,15 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Link } from "expo-router"; // Use Link from expo-router
+import { useRouter } from "expo-router"; // Use Link from expo-router
 
 const SignUp: React.FC = () => {
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -49,14 +51,20 @@ const SignUp: React.FC = () => {
           value={confirmPassword}
           onChangeText={setConfirmPassword}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/(tabs)")}
+        >
           <Text style={styles.buttonText}>SIGN UP</Text>
         </TouchableOpacity>
         <Text style={styles.footerText}>
           Already have an account?{" "}
-          <Link href="/components/authPage/signin" style={styles.signUp}>
-            Sign in
-          </Link>
+          <Text
+            style={styles.signIn}
+            onPress={() => router.push("/components/authPage/signin")}
+          >
+            Sign In
+          </Text>
         </Text>
       </View>
     </View>
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
     color: "#000",
     textAlign: "center",
   },
-  signUp: {
+  signIn: {
     color: "#1E90FF",
     fontWeight: "bold",
   },

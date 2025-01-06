@@ -6,11 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Link } from "expo-router"; // Use Link from expo-router
+import { useRouter } from "expo-router"; // Use Link from expo-router
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -34,14 +35,20 @@ const SignIn: React.FC = () => {
         <TouchableOpacity>
           <Text style={styles.forgotPassword}>Forgot your password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/(tabs)")}
+        >
           <Text style={styles.buttonText}>SIGN IN</Text>
         </TouchableOpacity>
         <Text style={styles.footerText}>
           Don't have an account?{" "}
-          <Link href="/components/authPage/signup" style={styles.signUp}>
+          <Text
+            style={styles.signUp}
+            onPress={() => router.push("/components/authPage/signup")}
+          >
             Sign up
-          </Link>
+          </Text>
         </Text>
       </View>
     </View>
