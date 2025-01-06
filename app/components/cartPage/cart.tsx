@@ -12,20 +12,9 @@ import {
 } from "tamagui";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
+import OrderItem, { sampleCartItems } from "@/app/enities/cartItem";
 
-type CartItemProps = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-  isChecked: boolean;
-  onQuantityChange: (quantity: number) => void;
-  onRemove: () => void;
-  onToggleCheck: (id: number) => void;
-};
-
-const CartItem: React.FC<CartItemProps> = ({
+const CartItem = ({
   id,
   name,
   price,
@@ -35,7 +24,7 @@ const CartItem: React.FC<CartItemProps> = ({
   onQuantityChange,
   onRemove,
   onToggleCheck,
-}) => {
+}: OrderItem) => {
   return (
     <Card padding={8} backgroundColor="$colorTransparent" width="100%">
       <XStack display="flex" justifyContent="space-between">
@@ -57,7 +46,7 @@ const CartItem: React.FC<CartItemProps> = ({
           </TouchableOpacity>
           <XStack space={12} alignItems="center">
             <Image
-              source={{ uri: image }}
+              source={image}
               width={100}
               height={100}
               borderRadius={8}
@@ -136,53 +125,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ total }) => {
 
 const CartPage: React.FC = () => {
   const router = useRouter();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Promio body lotion",
-      price: 29.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/FFCC80",
-      isChecked: true, // Mặc định đã được chọn
-    },
-    {
-      id: 2,
-      name: "Natural Organ oil",
-      price: 49.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/90CAF9",
-      isChecked: false,
-    },
-    {
-      id: 3,
-      name: "Promio body lotion",
-      price: 29.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/FFCC80",
-    },
-    {
-      id: 4,
-      name: "Natural Organ oil",
-      price: 49.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/90CAF9",
-    },
-    {
-      id: 5,
-      name: "Promio body lotion",
-      price: 29.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/FFCC80",
-    },
-    {
-      id: 6,
-      name: "Natural Organ oil",
-      price: 49.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150/90CAF9",
-    },
-    // Add more items here
-  ]);
+  const [cartItems, setCartItems] = useState(sampleCartItems);
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
     setCartItems((prevItems) =>
