@@ -1,8 +1,6 @@
-import { ImageSourcePropType } from "react-native";
-
 export default interface Product {
   name: string;
-  image: ImageSourcePropType;
+  image: any;
   price: string;
   rating: number;
   reviews: number;

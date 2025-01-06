@@ -34,14 +34,6 @@ const ProductDetailScreen = () => {
     },
   };
 
-  // Hàm để tăng số lượng
-  const increaseQuantity = () => setQuantity(quantity + 1);
-
-  // Hàm để giảm số lượng
-  const decreaseQuantity = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
-  };
-
   // Tổng số đánh giá để tính tỷ lệ
   const totalReviews = Object.values(product.ratingsCount).reduce(
     (sum, count) => sum + count,
@@ -128,7 +120,10 @@ const ProductDetailScreen = () => {
             <TouchableOpacity style={styles.addToCartButton}>
               <Text style={styles.addToCartText}>ADD TO CART</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buyButton}>
+            <TouchableOpacity
+              style={styles.buyButton}
+              onPress={() => router.push("/components/checkoutPage/checkout")}
+            >
               <Text style={styles.buyText}>BUY NOW</Text>
             </TouchableOpacity>
           </View>

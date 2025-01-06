@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import { Button, Input, XStack, YStack, Image, Text, View } from "tamagui";
+import { Input, XStack, YStack, Image, Text, View } from "tamagui";
 
 const ProfileScreen = () => {
   return (
