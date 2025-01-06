@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import ProductCard from "./homePage/productCard";
-import PopularCard from "./homePage/popularCard";
+import ProductCard from "./productCard";
+import PopularCard from "./popularCard";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { XStack, Image, View, Text, ScrollView } from "tamagui";
-import Banner from "./homePage/banner";
+import Banner from "./banner";
 import { useRouter } from "expo-router";
-import { sampleProducts } from "../enities/product";
-import { sampleCategories } from "../enities/category";
+import { sampleProducts } from "../../enities/product";
+import { sampleCategories } from "../../enities/category";
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const HomeScreen = () => {
         backgroundColor="#0B0B0B"
       >
         <Image
-          source={require("../../assets/images/AppIcon.jpg")}
+          source={require("../../../assets/images/AppIcon.jpg")}
           width={36}
           height={36}
           borderRadius={12}
@@ -34,7 +34,7 @@ const HomeScreen = () => {
           <TouchableOpacity
             onPress={() => router.push("/components/cartPage/cart")}
           >
-            <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+           <Ionicons name="cart-outline" size={24} color="#FBFCD4" />
           </TouchableOpacity>
         </XStack>
       </XStack>

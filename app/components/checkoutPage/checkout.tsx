@@ -253,7 +253,7 @@ const CheckoutScreen = () => {
           <TouchableOpacity
             onPress={() => {
               handlePlaceOrder();
-              router.push("/components/orderPage/order");
+              router.push("/(tabs)/order");
             }}
             style={styles.placeOrderButton}
           >

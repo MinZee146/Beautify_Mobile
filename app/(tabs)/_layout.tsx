@@ -55,12 +55,25 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="order"
+          options={{
+            title: "Orders",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons
+                name={focused ? "bag-handle" : "bag-handle-outline"}
+                color={color}
+                size={28}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="profile"
           options={{
             title: "Profile",
             tabBarIcon: ({ color, focused }) => (
-              <AntDesign
-                name={focused ? "infocirlce" : "infocirlceo"}
+              <Ionicons
+                name={focused ? "person" : "person-outline"}
                 color={color}
                 size={28}
               />

@@ -23,14 +23,14 @@ const OrderListScreen = () => {
           name: "Promio Body Lotion",
           price: "$29.99",
           quantity: 2,
-          image: require("../../../assets/images/Product/P1.webp"),
+          image: require("../../assets/images/Product/P1.webp"),
         },
         {
           id: "2",
           name: "Natural Organ Oil",
           price: "$49.99",
           quantity: 1,
-          image: require("../../../assets/images/Product/P2.webp"),
+          image: require("../../assets/images/Product/P2.webp"),
         },
       ],
     },
@@ -45,21 +45,21 @@ const OrderListScreen = () => {
           name: "Skin Oil Serum",
           price: "$39.99",
           quantity: 3,
-          image: require("../../../assets/images/Product/P3.webp"),
+          image: require("../../assets/images/Product/P3.webp"),
         },
         {
           id: "2",
           name: "Face Cream",
           price: "$19.99",
           quantity: 2,
-          image: require("../../../assets/images/Product/P4.webp"),
+          image: require("../../assets/images/Product/P4.webp"),
         },
         {
           id: "3",
           name: "Moisturizing Lotion",
           price: "$24.99",
           quantity: 1,
-          image: require("../../../assets/images/Product/P5.webp"),
+          image: require("../../assets/images/Product/P5.webp"),
         },
       ],
     },
@@ -126,15 +126,7 @@ const OrderListScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#F5F6F8" }}>
       <XStack style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
-        </TouchableOpacity>
         <Text style={styles.headerTitle}>Orders</Text>
-        <TouchableOpacity
-          onPress={() => router.push("/components/cartPage/cart")}
-        >
-          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
-        </TouchableOpacity>
       </XStack>
       <View style={styles.screenContainer}>
         <FlatList
@@ -158,7 +150,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: "#0b0b0b",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     borderBottomWidth: 1,
     borderColor: "#ddd",
   },

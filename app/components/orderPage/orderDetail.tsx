@@ -30,7 +30,7 @@ const OrderDetail = () => {
         <TouchableOpacity
           onPress={() => router.push("/components/cartPage/cart")}
         >
-          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+          <Ionicons name="cart-outline" size={24} color="#FBFCD4" />
         </TouchableOpacity>
       </XStack>
       <ScrollView style={styles.container}>
