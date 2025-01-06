@@ -38,15 +38,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {/* Product Details */}
         <YStack flex={1} justifyContent="space-between" padding={5}>
           {/* Product Name */}
-          <YStack gap={6}>
-            <Text fontSize={14} fontWeight="700" numberOfLines={2}>
+          <YStack gap={4}>
+            <Text fontSize={15} fontWeight="700" numberOfLines={2}>
               {product.name}
             </Text>
 
             {/* Rating and Reviews */}
             <XStack alignItems="center" gap={6}>
-              <AntDesign name="star" size={14} color="#FFD700" />
-              <Text fontSize={14} color="#6E6E6E">
+              <AntDesign name="star" size={15} color="#FFD700" />
+              <Text fontSize={13} color="#888888" fontWeight={"bold"}>
                 {product.rating} ({product.reviews} review
                 {product.reviews > 1 ? "s" : ""})
               </Text>
@@ -55,7 +55,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           {/* Price and Add to Cart Button */}
           <XStack justifyContent="space-between" alignItems="center">
-            <Text fontSize={18} fontWeight="600" color="#FF6D00">
+            <Text fontSize={16} fontWeight="bold" color="#FF6D00">
               ${product.price}
             </Text>
             <Button

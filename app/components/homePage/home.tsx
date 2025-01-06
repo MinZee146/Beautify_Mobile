@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical: 15,
+    marginVertical: 12,
     color: "#272B2E",
   },
   productList: {

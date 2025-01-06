@@ -3,7 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image } from "react-native";
-import { Card, Text, YStack, XStack } from "tamagui";
+import { Card, Text, YStack, XStack, View } from "tamagui";
 
 interface PopularCardProps {
   product: Product;
@@ -54,13 +54,15 @@ const PopularCard = ({ product }: PopularCardProps) => {
 
         {/* Giá và Đánh giá */}
         <XStack justifyContent="space-between" alignItems="center">
-          <Text fontWeight="600" fontSize={14} color="#FF6D00">
+          <Text fontWeight="bold" fontSize={14} color="#FF6D00">
             {product.price}$
           </Text>
-          <AntDesign name="star" size={16} color="#FFD700" />
-          <Text fontSize={12} color="#6E6E6E">
-            {product.rating} ({product.reviews})
-          </Text>
+          <View flexDirection="row" gap={4} alignItems="center">
+            <AntDesign name="star" size={16} color="#FFD700" />
+            <Text fontSize={12} fontWeight="bold" color="#aaa">
+              {product.rating}
+            </Text>
+          </View>
         </XStack>
       </YStack>
     </Card>
