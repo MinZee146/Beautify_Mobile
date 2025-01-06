@@ -51,7 +51,8 @@ const CommentScreen = () => {
       newEmail,
       parseFloat(totalRating),
       newComment,
-      newTitle
+      newTitle,
+      require("../../assets/images/model.jpg")
     );
 
     setComments((prevComments) => [...prevComments, newCommentObj]);
@@ -137,12 +138,10 @@ const CommentScreen = () => {
         paddingHorizontal={20}
         backgroundColor="#0b0b0b"
         alignItems="center"
+        justifyContent="center"
         borderBottomWidth={1}
         borderColor="#e0e0e0"
       >
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
-        </TouchableOpacity>
         <Text marginLeft={16} fontWeight="700" fontSize={18} color="#FBFCD4">
           Shop Reviews
         </Text>
