@@ -1,113 +1,160 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Image, View, Text, XStack } from "tamagui";
+import { useRouter } from "expo-router";
 
 const OrderDetail = () => {
+  const router = useRouter();
+  const orderPrice = 59.98;
+  const shippingFee = 5.0;
+  const voucherDiscount = 0;
+  const finalPrice = orderPrice + shippingFee - voucherDiscount;
+
   return (
-    <ScrollView style={styles.container}>
-      {/* Order Info Section */}
-      <View style={styles.orderInfo}>
-        <Text style={styles.orderId}>Order ID: 10</Text>
-        <Text style={styles.orderDate}>Order Date: 02/01/2025</Text>
-        <Text style={styles.expectedDelivery}>
-          Expected Delivery: 07/01/2025
+    <View style={{ flex: 1, backgroundColor: "#F5F6F8" }}>
+      <XStack
+        padding={12}
+        paddingHorizontal={20}
+        backgroundColor="#0b0b0b"
+        alignItems="center"
+        justifyContent="space-between"
+        borderBottomWidth={1}
+      >
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+        <Text fontWeight="700" fontSize={18} color="#FBFCD4">
+          Detail Order
         </Text>
-      </View>
+        <TouchableOpacity
+          onPress={() => router.push("/components/cartPage/cart")}
+        >
+          <Ionicons name="bag-handle-outline" size={24} color="#FBFCD4" />
+        </TouchableOpacity>
+      </XStack>
+      <ScrollView style={styles.container}>
+        {/* Order Info Section */}
+        <View style={styles.orderInfo}>
+          <Text style={styles.orderId}>Order ID: 10</Text>
+          <Text style={styles.orderDate}>Order Date: 02/01/2025</Text>
+          <Text style={styles.expectedDelivery}>
+            Expected Delivery: 07/01/2025
+          </Text>
+        </View>
 
-      {/* Order Status Section */}
-      <View style={styles.orderStatus}>
-        <Text style={styles.sectionTitle}>Order Status</Text>
-        <View style={styles.statusRow}>
-          {/* Step 1 */}
-          <View style={styles.statusStep}>
-            <FontAwesome5 name="hourglass-half" size={24} color="green" />
-            <Text>Preparing</Text>
-          </View>
-          {/* Line between */}
-          <View style={styles.statusLine}></View>
-          {/* Step 2 */}
-          <View style={styles.statusStep}>
-            <FontAwesome5 name="truck" size={24} color="orange" />
-            <Text>Delivering</Text>
-          </View>
-          {/* Line between */}
-          <View style={styles.statusLine}></View>
-          {/* Step 3 */}
-          <View style={styles.statusStep}>
-            <FontAwesome5 name="check-circle" size={24} color="grey" />
-            <Text>Completed</Text>
+        {/* Order Status Section */}
+        <View style={styles.orderStatus}>
+          <Text style={styles.sectionTitle}>Order Status</Text>
+          <View style={styles.statusRow}>
+            {/* Step 1 */}
+            <View style={styles.statusStep}>
+              <FontAwesome5 name="hourglass-half" size={24} color="#66BB6A" />
+              <Text style={styles.statusText}>Preparing</Text>
+            </View>
+            <View style={styles.statusLine}></View>
+            {/* Step 2 */}
+            <View style={styles.statusStep}>
+              <FontAwesome5 name="truck" size={24} color="#FFA726" />
+              <Text style={styles.statusText}>Delivering</Text>
+            </View>
+            <View style={styles.statusLine}></View>
+            {/* Step 3 */}
+            <View style={styles.statusStep}>
+              <FontAwesome5 name="check-circle" size={24} color="#BDBDBD" />
+              <Text style={styles.statusText}>Completed</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      {/* Order Items Section */}
-      <View style={styles.orderItems}>
-        <Text style={styles.sectionTitle}>Order Items</Text>
-        <View style={styles.itemRow}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/50" }}
-            style={styles.itemImage}
-          />
-          <Text>ndsa</Text>
-          <Text style={styles.itemPrice}>$10.00</Text>
+        {/* Order Items Section */}
+        <View style={styles.orderItems}>
+          <Text style={styles.sectionTitle}>Order Items</Text>
+          <View style={styles.itemRow}>
+            <Image
+              source={require("../../../assets/images/Product/P5.webp")}
+              style={styles.itemImage}
+            />
+            <View style={styles.itemDetails}>
+              <Text style={styles.itemName}>Face Cream</Text>
+              <Text style={styles.itemPrice}>$19.99</Text>
+            </View>
+          </View>
+          <View style={styles.itemRow}>
+            <Image
+              source={require("../../../assets/images/Product/P3.webp")}
+              style={styles.itemImage}
+            />
+            <View style={styles.itemDetails}>
+              <Text style={styles.itemName}>Skin Oil Serum</Text>
+              <Text style={styles.itemPrice}>$39.99</Text>
+            </View>
+          </View>
         </View>
-        <View style={styles.itemRow}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/50" }}
-            style={styles.itemImage}
-          />
-          <Text>update</Text>
-          <Text style={styles.itemPrice}>$10.00</Text>
-        </View>
-      </View>
 
-      {/* Payment Details Section */}
-      <View style={styles.paymentDetails}>
-        <Text style={styles.sectionTitle}>Payment Details</Text>
-        <Text>Order Price: $20.00</Text>
-        <Text>Shipping Fee: $5.00</Text>
-        <Text>Voucher (None): - $0</Text>
-        <Text>Payment Method: Cash on Delivery</Text>
-        <Text style={styles.finalPrice}>Final Price: $25.00</Text>
-      </View>
-    </ScrollView>
+        {/* Payment Details Section */}
+        <View style={styles.paymentDetails}>
+          <Text style={styles.sectionTitle}>Payment Details</Text>
+          <Text style={styles.paymentText}>
+            Order Price: ${orderPrice.toFixed(2)}
+          </Text>
+          <Text style={styles.paymentText}>
+            Shipping Fee: ${shippingFee.toFixed(2)}
+          </Text>
+          <Text style={styles.paymentText}>
+            Voucher (None): - ${voucherDiscount.toFixed(2)}
+          </Text>
+          <Text style={styles.paymentText}>
+            Payment Method: Cash on Delivery
+          </Text>
+          <Text style={styles.finalPrice}>
+            Final Price: ${finalPrice.toFixed(2)}
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
     padding: 16,
   },
   orderInfo: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
   },
   orderId: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
+    color: "#333",
   },
   orderDate: {
     fontSize: 14,
-    color: "gray",
+    color: "#757575",
   },
   expectedDelivery: {
     fontSize: 14,
-    color: "gray",
+    color: "#757575",
   },
   orderStatus: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 12,
   },
   statusRow: {
     flexDirection: "row",
@@ -116,46 +163,67 @@ const styles = StyleSheet.create({
   },
   statusStep: {
     alignItems: "center",
-    width: "25%", // Adjust as needed
+    flex: 1,
   },
   statusLine: {
     flex: 1,
-    height: 2, // Thickness of the line
-    backgroundColor: "grey", // Color of the line
-    marginHorizontal: 8, // Spacing around the line
+    height: 2,
+    backgroundColor: "#BDBDBD",
+    marginHorizontal: 4,
+  },
+  statusText: {
+    fontSize: 12,
+    marginTop: 4,
   },
   orderItems: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 16,
   },
   itemRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 12,
   },
   itemImage: {
     width: 50,
     height: 50,
-    marginRight: 8,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  itemDetails: {
+    flex: 1,
+  },
+  itemName: {
+    fontSize: 16,
+    fontWeight: "600",
   },
   itemPrice: {
     fontSize: 14,
     fontWeight: "bold",
+    color: "#333",
   },
   paymentDetails: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+  },
+  paymentText: {
+    fontSize: 14,
+    color: "#757575",
+    marginBottom: 4,
   },
   finalPrice: {
     fontSize: 16,
-    fontWeight: "bold",
-    marginVertical: 8,
-    color: "green",
+    fontWeight: "700",
+    color: "#388E3C",
+    marginTop: 8,
   },
 });
 
