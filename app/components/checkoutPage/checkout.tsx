@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
   TouchableOpacity,
   Modal,
   FlatList,
   StyleSheet,
-  Image,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { View, Text, Image, XStack } from "tamagui";
+import { useRouter } from "expo-router";
 const CheckoutScreen = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -33,17 +31,24 @@ const CheckoutScreen = () => {
   const products = [
     {
       id: 1,
-      name: "Product 1",
-      price: "$50",
-      image: "https://via.placeholder.com/150",
-      quantity: 2,
+      name: "Skin Oil Serum",
+      price: "$39.99",
+      quantity: 1,
+      image: require("../../../assets/images/Product/P3.webp"),
     },
     {
       id: 2,
-      name: "Product 2",
-      price: "$30",
-      image: "https://via.placeholder.com/150",
-      quantity: 1,
+      name: "Face Cream",
+      price: "$19.99",
+      quantity: 2,
+      image: require("../../../assets/images/Product/P4.webp"),
+    },
+    {
+      id: 3,
+      name: "Moisturizing Lotion",
+      price: "$24.99",
+      quantity: 3,
+      image: require("../../../assets/images/Product/P5.webp"),
     },
   ];
 
@@ -105,21 +110,33 @@ const CheckoutScreen = () => {
     setIsPaymentModalVisible(false);
   };
 
+  const router = useRouter();
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.container}>
+        {/* Header */}
+        <XStack
+          padding={12}
+          paddingHorizontal={20}
+          backgroundColor="#0b0b0b"
+          alignItems="center"
+          borderBottomWidth={1}
+        >
+          <TouchableOpacity onPress={() => router.back()}>
+            <Ionicons name="arrow-back" size={24} color="#FBFCD4" />
+          </TouchableOpacity>
+          <Text marginLeft={8} fontWeight="700" fontSize={20} color="#FBFCD4">
+            Checkout
+          </Text>
+        </XStack>
         <FlatList
           contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={
-            <>
-              {/* Header */}
-              <View style={styles.header}>
-                <Text style={styles.headerTitle}>Checkout</Text>
-              </View>
-
+            <View>
               {/* User Info */}
               <View style={styles.section}>
                 <View style={styles.rowBetween}>
@@ -193,7 +210,7 @@ const CheckoutScreen = () => {
                     </Text>
                   </View>
                   <TouchableOpacity
-                    onPress={() => console.log("Change payment method")}
+                    onPress={() => setIsPaymentModalVisible(true)}
                   >
                     <Text style={styles.changeText}>Change</Text>
                   </TouchableOpacity>
@@ -204,13 +221,13 @@ const CheckoutScreen = () => {
               <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Order Summary</Text>
               </View>
-            </>
+            </View>
           }
           data={products}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.productRow}>
-              <Image source={{ uri: item.image }} style={styles.productImage} />
+              <Image source={item.image} style={styles.productImage} />
               <View style={styles.productDetails}>
                 <Text style={styles.productName}>{item.name}</Text>
                 <Text style={styles.productPrice}>
@@ -232,7 +249,10 @@ const CheckoutScreen = () => {
             ).toFixed(2)}
           </Text>
           <TouchableOpacity
-            onPress={handlePlaceOrder}
+            onPress={() => {
+              handlePlaceOrder();
+              router.push("/components/orderPage/order");
+            }}
             style={styles.placeOrderButton}
           >
             <Text style={styles.placeOrderButtonText}>Place Order</Text>
